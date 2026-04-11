@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tesseract Home — In-Home Intelligence</title>
+<meta name="description" content="Intelligent homes that learn, adapt, and make life easier while keeping privacy as our foremost concern.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --navy-deep: #060D18; --navy: #0A1628; --navy-mid: #0F1D32;
+  --navy-light: #162440; --navy-lighter: #1E3054;
+  --blue: #4A9EF5; --blue-bright: #5CB0FF; --blue-dim: #3A7CC8;
+  --green: #4CAF50; --green-bright: #66CC6A; --green-dim: #3D8B40;
+  --white: #FFFFFF; --grey-100: #E8ECF2; --grey-200: #C4CDD8;
+  --grey-300: #8A99AE; --grey-400: #5A6B82; --grey-500: #3A4B62;
+  --border: rgba(74, 158, 245, 0.12); --border-green: rgba(76, 175, 80, 0.15);
+  --glow-green: rgba(76, 175, 80, 0.15); --glow-blue: rgba(74, 158, 245, 0.15);
+}
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--navy-deep); color: var(--grey-100); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(6,13,24,0.85); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-bottom: 1px solid var(--border); transition: background 0.4s, box-shadow 0.4s; }
+nav.scrolled { background: rgba(6,13,24,0.95); box-shadow: 0 4px 24px rgba(0,0,0,0.3); }
+nav .container { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+.nav-logo img { height: 36px; width: auto; transition: transform 0.3s; }
+.nav-logo:hover img { transform: rotate(8deg) scale(1.05); }
+.nav-logo-text { font-size: 1.2rem; font-weight: 700; color: var(--white); letter-spacing: 0.08em; }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a { color: var(--grey-300); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.25s; position: relative; }
+.nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1.5px; background: var(--green); transition: width 0.3s; }
+.nav-links a:hover { color: var(--white); }
+.nav-links a:hover::after { width: 100%; }
+.nav-links a.active { color: var(--green-bright); }
+.nav-links a.active::after { width: 100%; }
+.nav-cta { padding: 10px 24px; border-radius: 8px; font-size: 0.875rem; font-weight: 600; text-decoration: none; color: var(--white); background: linear-gradient(135deg, var(--green), var(--green-dim)); transition: transform 0.25s, box-shadow 0.25s; }
+.nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 20px var(--glow-green); }
+.mobile-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+.mobile-toggle span { display: block; width: 22px; height: 2px; background: var(--grey-200); margin: 5px 0; }
+
+/* HERO */
+.home-hero { padding: 140px 0 100px; position: relative; overflow: hidden; }
+.home-hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 50% 45% at 30% 40%, rgba(76,175,80,0.07) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 70% 60%, rgba(74,158,245,0.04) 0%, transparent 70%), var(--navy-deep); }
+.home-hero .container { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.home-hero-text { animation: fadeUp 0.8s ease-out; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+.back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--grey-400); font-size: 0.82rem; text-decoration: none; margin-bottom: 32px; transition: color 0.25s, gap 0.25s; }
+.back-link:hover { color: var(--green); gap: 10px; }
+.section-label { display: inline-flex; align-items: center; gap: 8px; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); margin-bottom: 16px; }
+.section-label.blue { color: var(--blue); }
+h1 { font-size: clamp(2.4rem, 4.5vw, 3.2rem); font-weight: 800; color: var(--white); letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 24px; }
+h1 .green-text { color: var(--green-bright); }
+.hero-desc { font-size: 1.02rem; color: var(--grey-300); line-height: 1.8; margin-bottom: 32px; }
+.hero-desc strong { color: var(--grey-100); font-weight: 600; }
+.btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 10px; background: linear-gradient(135deg, var(--green), var(--green-dim)); color: var(--white); font-size: 1rem; font-weight: 600; text-decoration: none; transition: transform 0.25s, box-shadow 0.25s; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px var(--glow-green); }
+.philosophy-card { padding: 32px; border-radius: 16px; margin-bottom: 20px; transition: transform 0.3s, box-shadow 0.3s; animation: fadeUp 0.8s ease-out; }
+.philosophy-card:nth-child(2) { animation-delay: 0.15s; animation-fill-mode: both; }
+.philosophy-card:hover { transform: translateY(-3px); }
+.philosophy-card--green { background: linear-gradient(135deg, rgba(76,175,80,0.1), rgba(76,175,80,0.02)); border: 1px solid rgba(76,175,80,0.2); }
+.philosophy-card--green:hover { box-shadow: 0 12px 40px rgba(76,175,80,0.08); }
+.philosophy-card--blue { background: linear-gradient(135deg, rgba(74,158,245,0.08), rgba(74,158,245,0.02)); border: 1px solid rgba(74,158,245,0.15); }
+.philosophy-card--blue:hover { box-shadow: 0 12px 40px rgba(74,158,245,0.08); }
+.philosophy-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+.philosophy-card--green .philosophy-title { color: var(--green-bright); }
+.philosophy-card--blue .philosophy-title { color: var(--blue-bright); }
+.philosophy-card p { font-size: 0.92rem; color: var(--grey-200); line-height: 1.75; }
+
+/* FEATURES */
+.features { padding: 100px 0; background: var(--navy); border-top: 1px solid var(--border); }
+.features-header { margin-bottom: 48px; }
+.features-title { font-size: 1.5rem; font-weight: 800; color: var(--white); margin-bottom: 12px; }
+.features-desc { font-size: 1rem; color: var(--grey-300); max-width: 560px; line-height: 1.7; }
+.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.feature-card { padding: 32px 24px; border-radius: 14px; background: var(--navy-mid); border: 1px solid var(--border); transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; }
+.feature-card:hover { border-color: rgba(76,175,80,0.25); transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,0.25); }
+.feature-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: var(--glow-green); margin-bottom: 20px; color: var(--green-bright); font-size: 1.3rem; transition: transform 0.3s; }
+.feature-card:hover .feature-icon { transform: scale(1.1); }
+.feature-card h4 { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+.feature-card p { font-size: 0.88rem; color: var(--grey-300); line-height: 1.7; }
+
+/* BUILDING INTELLIGENCE */
+.building-intel { padding: 100px 0; background: var(--navy-deep); border-top: 1px solid var(--border); }
+.building-header { text-align: center; margin-bottom: 56px; }
+.building-title { font-size: 1.5rem; font-weight: 800; color: var(--white); margin-bottom: 12px; }
+.building-desc { font-size: 1rem; color: var(--grey-300); max-width: 580px; margin: 0 auto; line-height: 1.7; }
+.building-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 900px; margin: 0 auto; }
+.building-card { padding: 32px; border-radius: 14px; background: var(--navy-mid); border: 1px solid var(--border); transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; }
+.building-card:hover { border-color: rgba(74,158,245,0.2); transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+.building-card-title { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+.building-card-title .icon { color: var(--blue); transition: transform 0.3s; }
+.building-card:hover .building-card-title .icon { transform: scale(1.15); }
+.building-card p { font-size: 0.9rem; color: var(--grey-300); line-height: 1.7; }
+
+/* PRIVACY */
+.privacy { padding: 100px 0; background: var(--navy); border-top: 1px solid var(--border); }
+.privacy-inner { max-width: 800px; margin: 0 auto; text-align: center; }
+.privacy-shield { width: 72px; height: 72px; border-radius: 20px; background: var(--glow-green); display: flex; align-items: center; justify-content: center; margin: 0 auto 32px; transition: transform 0.3s; }
+.privacy-shield:hover { transform: scale(1.08) rotate(3deg); }
+.privacy-title { font-size: 1.8rem; font-weight: 800; color: var(--white); margin-bottom: 16px; }
+.privacy-desc { font-size: 1.05rem; color: var(--grey-300); line-height: 1.8; max-width: 600px; margin: 0 auto 40px; }
+.privacy-points { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: center; }
+.privacy-point { padding: 28px 20px; border-radius: 12px; background: var(--navy-mid); border: 1px solid var(--border-green); transition: transform 0.3s, box-shadow 0.3s; }
+.privacy-point:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(76,175,80,0.08); }
+.privacy-point-title { font-size: 0.95rem; font-weight: 700; color: var(--green-bright); margin-bottom: 6px; }
+.privacy-point p { font-size: 0.85rem; color: var(--grey-300); line-height: 1.6; }
+
+/* PILOT */
+.pilot { padding: 80px 0; background: var(--navy-deep); border-top: 1px solid var(--border); }
+.pilot-inner { display: flex; align-items: center; gap: 40px; padding: 40px 48px; border-radius: 16px; background: linear-gradient(135deg, rgba(76,175,80,0.06), rgba(74,158,245,0.04)); border: 1px solid var(--border-green); transition: border-color 0.3s; }
+.pilot-inner:hover { border-color: rgba(76,175,80,0.3); }
+.pilot-icon { width: 64px; height: 64px; border-radius: 16px; background: var(--glow-green); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.pilot-title { font-size: 1.15rem; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+.pilot-desc { font-size: 0.92rem; color: var(--grey-300); line-height: 1.7; }
+
+/* CTA */
+.cta { padding: 100px 0; text-align: center; background: var(--navy); border-top: 1px solid var(--border); }
+.cta h2 { font-size: 2rem; font-weight: 800; color: var(--white); margin-bottom: 16px; }
+.cta p { font-size: 1rem; color: var(--grey-300); max-width: 460px; margin: 0 auto 32px; }
+.cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-secondary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 10px; background: transparent; border: 1px solid var(--navy-lighter); color: var(--grey-200); font-size: 1rem; font-weight: 500; text-decoration: none; transition: border-color 0.25s, color 0.25s, background 0.25s; }
+.btn-secondary:hover { border-color: var(--green); color: var(--white); background: rgba(76,175,80,0.05); }
+
+/* FOOTER */
+footer { padding: 40px 0; border-top: 1px solid var(--border); background: var(--navy-deep); }
+.footer-inner { display: flex; justify-content: space-between; align-items: center; }
+.footer-left { display: flex; align-items: center; gap: 14px; }
+.footer-left img { height: 28px; }
+.footer-brand { font-size: 0.9rem; font-weight: 600; color: var(--grey-200); letter-spacing: 0.06em; }
+.footer-tagline { font-size: 0.75rem; color: var(--grey-400); }
+.footer-right { font-size: 0.78rem; color: var(--grey-500); }
+
+/* MOBILE MENU */
+.mobile-menu-overlay {
+  display: none; position: fixed; inset: 0; z-index: 999;
+  background: rgba(6,13,24,0.95); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  flex-direction: column; align-items: center; justify-content: center; gap: 0;
+}
+.mobile-menu-overlay.open { display: flex; }
+.mobile-menu-overlay a {
+  color: var(--grey-100); text-decoration: none; font-size: 1.25rem; font-weight: 500;
+  padding: 18px 0; width: 80%; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: color 0.25s;
+}
+.mobile-menu-overlay a:last-child { border-bottom: none; }
+.mobile-menu-overlay a:hover { color: var(--green-bright); }
+.mobile-menu-close {
+  position: absolute; top: 22px; right: 24px; background: none; border: none;
+  color: var(--grey-200); font-size: 2rem; cursor: pointer; padding: 8px; line-height: 1;
+}
+
+/* RESPONSIVE */
+@media (max-width: 968px) {
+  .home-hero .container { grid-template-columns: 1fr; gap: 40px; }
+  .features-grid { grid-template-columns: 1fr 1fr; }
+  .building-grid { grid-template-columns: 1fr; }
+  .privacy-points { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
+  .pilot-inner { flex-direction: column; text-align: center; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .mobile-toggle { display: block; }
+  nav .nav-cta { display: none; }
+  .home-hero { padding: 100px 0 60px; }
+  h1 { font-size: clamp(1.8rem, 4vw, 2.4rem); }
+  .hero-desc { font-size: 0.92rem; }
+  .features { padding: 60px 0; }
+  .features-grid { grid-template-columns: 1fr; }
+  .feature-card { padding: 24px 20px; }
+  .feature-icon { width: 40px; height: 40px; margin-bottom: 14px; }
+  .building-intel { padding: 60px 0; }
+  .building-card { padding: 24px 20px; }
+  .privacy { padding: 60px 0; }
+  .privacy-title { font-size: 1.4rem; }
+  .privacy-desc { font-size: 0.95rem; }
+  .pilot { padding: 60px 0; }
+  .pilot-inner { padding: 28px 24px; gap: 24px; }
+  .cta { padding: 60px 0; }
+  .cta h2 { font-size: 1.6rem; }
+  .cta-buttons { flex-direction: column; align-items: center; }
+  .btn-primary, .btn-secondary { padding: 12px 24px; font-size: 0.92rem; }
+  .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
+  .philosophy-card { padding: 24px 20px; }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  h1 { font-size: 1.7rem; }
+  .privacy-shield { width: 56px; height: 56px; border-radius: 14px; }
+  .privacy-point { padding: 20px 16px; }
+  .pilot-icon { width: 48px; height: 48px; }
+  nav .container { height: 60px; }
+  .nav-logo img { height: 30px; }
+  .nav-logo-text { font-size: 1rem; }
+  .back-link { margin-bottom: 20px; }
+  .section-label { font-size: 0.72rem; }
+  .philosophy-card p { font-size: 0.85rem; }
+}
+
+.animate-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94); }
+.animate-in.visible { opacity: 1; transform: translateY(0); }
+.stagger-1 { transition-delay: 0.05s; } .stagger-2 { transition-delay: 0.1s; }
+.stagger-3 { transition-delay: 0.15s; } .stagger-4 { transition-delay: 0.2s; }
+.stagger-5 { transition-delay: 0.25s; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="index.html" class="nav-logo"><img src="assets/logo_transparent.png" alt="Tesseract"><span class="nav-logo-text">TESSERACT</span></a>
+    <ul class="nav-links">
+      <li><a href="twin.html">Twin Platform</a></li>
+      <li><a href="home.html" class="active">Home Intelligence</a></li>
+      <li><a href="index.html#ecosystem">Ecosystem</a></li>
+      <li><a href="index.html#foundation">Foundation</a></li>
+    </ul>
+    <a href="index.html#contact" class="nav-cta">Get in Touch</a>
+    <button class="mobile-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu-overlay" id="mobileMenu">
+  <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">&times;</button>
+  <a href="index.html">Home</a>
+  <a href="twin.html">Twin Platform</a>
+  <a href="home.html">Home Intelligence</a>
+  <a href="index.html#ecosystem">Ecosystem</a>
+  <a href="index.html#contact">Get in Touch</a>
+</div>
+
+<!-- HERO -->
+<section class="home-hero">
+  <div class="home-hero-bg"></div>
+  <div class="container">
+    <div class="home-hero-text">
+      <a href="index.html" class="back-link">← Back to Tesseract</a>
+      <div class="section-label">In-Home Intelligence</div>
+      <h1>Explore In-Home Intelligence<br>Powered by <span class="green-text">Tesseract</span></h1>
+      <p class="hero-desc">
+        We're building homes that are <strong>intelligent, not just automated.</strong>
+        Homes that learn how you live, adapt to your preferences, and make everyday
+        life effortless, while keeping your privacy as our foremost concern.
+      </p>
+      <p class="hero-desc" style="margin-bottom: 36px;">
+        Most "smart homes" are collections of disconnected devices with apps nobody
+        opens after the first month. Tesseract Home is different. It's an integrated
+        building intelligence platform designed from the ground up for luxury residences,
+        where the technology disappears into the experience and the home genuinely
+        gets better over time.
+      </p>
+      <a href="index.html#contact" class="btn-primary">Learn More <span>→</span></a>
+    </div>
+    <div>
+      <div class="philosophy-card philosophy-card--green">
+        <div class="philosophy-title">Intelligent, Not Just Automated</div>
+        <p>An automated home follows commands. An intelligent home anticipates needs. It learns your routines, adjusts lighting and climate before you ask, manages energy based on real usage patterns, and predicts maintenance before something breaks. All while keeping your data on-device and your privacy intact.</p>
+      </div>
+      <div class="philosophy-card philosophy-card--blue">
+        <div class="philosophy-title">Building Intelligence</div>
+        <p>Beyond the individual unit, Tesseract Home operates at the building level. Intelligent concierge services, shared amenity scheduling, package and visitor management, predictive elevator dispatch, and building-wide energy optimization. The entire building becomes a responsive, living system.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IN-HOME FEATURES -->
+<section class="features">
+  <div class="container">
+    <div class="features-header">
+      <div class="section-label">In-Home Features</div>
+      <div class="features-title">Your Home, Quietly Smarter</div>
+      <p class="features-desc">Every feature is designed to be invisible until you need it, and ready before you ask.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></div>
+        <h4>Adaptive Climate &amp; Lighting</h4>
+        <p>Learns your preferences across time of day, season, and occupancy. Adjusts ambience automatically, with no schedules or manual controls needed.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <h4>Energy Optimization</h4>
+        <p>Real-time energy monitoring with ML-driven usage optimization. Reduces consumption without compromising comfort, delivering measurable savings month over month.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg></div>
+        <h4>Predictive Maintenance</h4>
+        <p>Sensors detect anomalies in HVAC, plumbing, and electrical systems before failures occur. Issues are flagged and resolved before you ever notice them.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h4>Concierge Services</h4>
+        <p>AI-powered concierge that handles daily requests, from housekeeping scheduling to restaurant reservations to cab coordination. Available 24/7 through the resident app.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <h4>Resident App</h4>
+        <p>One app for everything: unit controls, building amenities, maintenance requests, community updates, visitor access, and energy dashboards. Designed for simplicity.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUILDING INTELLIGENCE -->
+<section class="building-intel">
+  <div class="container">
+    <div class="building-header">
+      <div class="section-label blue" style="justify-content: center;">Building-Level Intelligence</div>
+      <div class="building-title">The Entire Building, One Responsive System</div>
+      <p class="building-desc">Tesseract Home doesn't stop at your front door. It orchestrates the entire building as a single intelligent system, managing shared infrastructure, common areas, and services.</p>
+    </div>
+    <div class="building-grid">
+      <div class="building-card"><div class="building-card-title"><span class="icon">◆</span> Intelligent Concierge</div><p>Building-wide concierge that coordinates across residents: package management, visitor screening, service provider scheduling, and emergency response protocols.</p></div>
+      <div class="building-card"><div class="building-card-title"><span class="icon">◆</span> Amenity Scheduling</div><p>Smart allocation of shared amenities like clubhouse, gym, pool, and party halls, with usage analytics, peak-time management, and fair access policies.</p></div>
+      <div class="building-card"><div class="building-card-title"><span class="icon">◆</span> Predictive Elevator Dispatch</div><p>ML-driven elevator management that learns building traffic patterns, including morning rush, evening returns, and weekend flow, pre-positioning cars to minimize wait times.</p></div>
+      <div class="building-card"><div class="building-card-title"><span class="icon">◆</span> Building-Wide Energy</div><p>Holistic energy management across common areas, lobbies, parking, and shared HVAC. Optimizes consumption at the building level while maintaining comfort standards.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVACY -->
+<section class="privacy">
+  <div class="container">
+    <div class="privacy-inner">
+      <div class="privacy-shield"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#66CC6A" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div class="privacy-title">Privacy as a Foundation,<br>Not an Afterthought</div>
+      <p class="privacy-desc">Your home learns about you and keeps it to itself. Every piece of Tesseract Home is designed with privacy as an architectural constraint, not a marketing checkbox.</p>
+      <div class="privacy-points">
+        <div class="privacy-point"><div class="privacy-point-title">On-Device Processing</div><p>All intelligence runs locally. No personal data leaves your home. No cloud dependency for core features.</p></div>
+        <div class="privacy-point"><div class="privacy-point-title">No Third-Party Analytics</div><p>We don't sell usage patterns, don't partner with ad networks, and don't share behavioral data with anyone.</p></div>
+        <div class="privacy-point"><div class="privacy-point-title">On-Premises Infrastructure</div><p>Building-level intelligence stays within the building. Data sovereignty is non-negotiable at every layer.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PILOT -->
+<section class="pilot">
+  <div class="container">
+    <div class="pilot-inner">
+      <div class="pilot-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#66CC6A" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+      <div><div class="pilot-title">Active Pilot in Progress</div><p class="pilot-desc">Tesseract Home is being deployed in a live luxury residential project in Mumbai, validated by real residents, refined with real usage data. This isn't a concept deck. It's a platform being built alongside the buildings it will live in.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="container">
+    <h2>Make Your Next Building Intelligent</h2>
+    <p>Interested in deploying Tesseract Home in your luxury development? Let's talk about what's possible.</p>
+    <div class="cta-buttons">
+      <a href="mailto:harshitchhajed@gmail.com" class="btn-primary">Get in Touch <span>→</span></a>
+      <a href="twin.html" class="btn-secondary">Explore Twin Platform</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-left"><img src="assets/logo_transparent.png" alt="Tesseract"><div><div class="footer-brand">TESSERACT</div><div class="footer-tagline">Real Estate Intelligence</div></div></div>
+      <div class="footer-right">Mumbai, India</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.feature-card').forEach((el, i) => { el.classList.add('animate-in', 'stagger-' + (i + 1)); obs.observe(el); });
+  document.querySelectorAll('.building-card').forEach((el, i) => { el.classList.add('animate-in', 'stagger-' + (i + 1)); obs.observe(el); });
+  document.querySelectorAll('.privacy-point').forEach((el, i) => { el.classList.add('animate-in', 'stagger-' + (i + 1)); obs.observe(el); });
+  ['.pilot-inner'].forEach(sel => { const el = document.querySelector(sel); if (el) { el.classList.add('animate-in'); obs.observe(el); } });
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
+
+  // Mobile menu
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileToggle = document.querySelector('.mobile-toggle');
+  const mobileClose = document.getElementById('mobileMenuClose');
+  mobileToggle.addEventListener('click', () => { mobileMenu.classList.add('open'); document.body.style.overflow = 'hidden'; });
+  mobileClose.addEventListener('click', () => { mobileMenu.classList.remove('open'); document.body.style.overflow = ''; });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => { mobileMenu.classList.remove('open'); document.body.style.overflow = ''; });
+  });
+});
+</script>
+</body>
+</html>
