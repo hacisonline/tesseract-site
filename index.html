@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tesseract - Real Estate Intelligence</title>
 <meta name="description" content="Tesseract builds real estate intelligence products before and after the asset exists: Tesseract Twin for strategy, and Tesseract Home for intelligent spaces.">
+<meta name="theme-color" content="#050b14">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap">
@@ -29,7 +31,7 @@
   --green-line: rgba(114, 217, 118, 0.24);
   --shadow: 0 34px 90px rgba(0, 0, 0, 0.36);
 }
-html { scroll-behavior: smooth; font-size: 16px; }
+html { scroll-behavior: smooth; font-size: 16px; background: var(--deep); }
 body {
   min-height: 100vh;
   font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -38,6 +40,7 @@ body {
     radial-gradient(circle at 16% 8%, rgba(74, 158, 245, 0.17), transparent 30rem),
     radial-gradient(circle at 86% 18%, rgba(76, 175, 80, 0.075), transparent 24rem),
     linear-gradient(180deg, var(--deep) 0%, #07111d 44%, var(--deep) 100%);
+  background-color: var(--deep);
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
