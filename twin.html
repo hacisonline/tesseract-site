@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tesseract Twin — Development Strategy Platform</title>
-<meta name="description" content="A digital twin that models the complete 6-stage Mumbai development lifecycle with zone-aware costing, regulatory intelligence, and dynamic risk scoring.">
+<meta name="description" content="Tesseract Twin connects feasibility, approvals, capital, execution risk and returns before capital is committed.">
+<link rel="icon" type="image/png" href="assets/logo_transparent.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -216,10 +217,10 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); background: var(-
   <div class="container">
     <a href="index.html" class="nav-logo"><img src="assets/logo_transparent.png" alt="Tesseract"><span class="nav-logo-text">TESSERACT</span></a>
     <ul class="nav-links">
-      <li><a href="twin.html" class="active">Twin Platform</a></li>
-      <li><a href="home.html">Home Intelligence</a></li>
-      <li><a href="index.html#ecosystem">Ecosystem</a></li>
-      <li><a href="index.html#foundation">Foundation</a></li>
+      <li><a href="twin.html" class="active">Twin</a></li>
+      <li><a href="brain.html">Brain</a></li>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="home-architecture-explorer/">Architecture</a></li>
     </ul>
     <a href="index.html#contact" class="nav-cta">Get in Touch</a>
     <button class="mobile-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -230,9 +231,10 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); background: var(-
 <div class="mobile-menu-overlay" id="mobileMenu">
   <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">&times;</button>
   <a href="index.html">Home</a>
-  <a href="twin.html">Twin Platform</a>
-  <a href="home.html">Home Intelligence</a>
-  <a href="index.html#ecosystem">Ecosystem</a>
+  <a href="twin.html">Twin</a>
+  <a href="brain.html">Brain</a>
+  <a href="home.html">Home</a>
+  <a href="home-architecture-explorer/">Architecture</a>
   <a href="index.html#contact">Get in Touch</a>
 </div>
 
@@ -246,11 +248,9 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); background: var(-
       <h1>Tesseract Twin</h1>
       <div class="twin-tagline">See what others can't.</div>
       <p class="hero-desc">
-        A digital twin that models the complete 6-stage Mumbai development lifecycle,
-        from feasibility through completion, with zone-aware costing, regulatory
-        intelligence, and dynamic execution-risk scoring. Built on data from
-        MahaRERA, Knight Frank, CBRE, JLL, and Anarock, calibrated across
-        9 zones and 405 decision variables.
+        A development-strategy digital twin that connects feasibility, approvals,
+        capital, execution risk and returns before capital is committed. Test the
+        project as one connected system instead of a chain of disconnected assumptions.
       </p>
       <a href="https://hacisonline.github.io/REbuildlog/" target="_blank" class="btn-primary">View Build Log <span>→</span></a>
     </div>
@@ -264,7 +264,7 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); background: var(-
 <section class="stages">
   <div class="container">
     <div class="stages-title">The 6-Stage Execution Lifecycle</div>
-    <p class="stages-desc">Every Mumbai development project passes through six critical gates. The Twin models each one with zone-specific costs, regulatory logic, and capital chain analysis.</p>
+    <p class="stages-desc">Twin follows the project from feasibility through completion, keeping development logic, capital pressure and execution risk connected across the lifecycle.</p>
     <div class="stages-visual">
       <div class="stage-pill"><div class="stage-num">STAGE 01</div><div class="stage-name">Feasibility</div><div class="stage-desc">Land cost, ASP benchmarks, zone selection</div></div>
       <div class="stage-connector">→</div>
@@ -285,40 +285,14 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); background: var(-
 <section class="features">
   <div class="container">
     <div class="features-title">Platform Capabilities</div>
-    <p class="features-desc">Every feature is calibrated against real project data and Mumbai's specific regulatory environment.</p>
+    <p class="features-desc">The platform brings project mechanics into one decision environment so a change in one assumption can be understood across the project.</p>
     <div class="features-grid">
-      <div class="feature-card"><div class="feature-title"><span class="icon">◆</span> Zone Aware Engine</div><p>Zones with calibrated ASP ranges (₹18,000–1,50,000/sqft), construction cost benchmarks, FSI regulations, and Ready Reckoner rates sourced from MahaRERA, IGR Maharashtra, and industry reports.</p></div>
-      <div class="feature-card"><div class="feature-title"><span class="icon">◆</span> FSI &amp; Development Rights</div><p>DCPR 2034-compliant FSI calculator with road width, zone, and project type inputs. Models fungible FSI (35% of base), TDR acquisition costs, and BMC premium financing across four payment schemes.</p></div>
-      <div class="feature-card"><div class="feature-title"><span class="icon">◆</span> Funding Waterfall</div><p>Left-to-right capital consumption: Equity (first draw) → Debt (18% p.a.) → Pre-sales (70% RERA escrow) → Bridge financing (20% penalty). Automatic shortfall detection with visual alerts.</p></div>
-      <div class="feature-card"><div class="feature-title"><span class="icon">◆</span> Compare Mode</div><p>Run two fully independent scenarios side-by-side with iframe isolation architecture. Real-time composite risk score gauges, persistent session state, and synchronized dark mode across panes.</p></div>
-      <div class="feature-card"><div class="feature-title"><span class="icon">◆</span> Dynamic Risk Scoring</div><p>Per-stage success metrics with composite ratings and shortfall detection. Every variable feeds a risk score that updates in real-time as you change assumptions, with no waiting for recalculation.</p></div>
-      <div class="feature-card"><div class="feature-title"><span class="icon">◆</span> Offline-First Architecture</div><p>Single-file HTML dashboard (266KB) works on airplanes, USB drives, or shared servers. Optional backend API with graceful degradation. Zero dependencies, zero setup.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- DATA -->
-<section class="data-strip">
-  <div class="container">
-    <div class="data-grid">
-      <div class="data-card"><div class="data-number">9</div><div class="data-label">Zones<br>modelled</div></div>
-      <div class="data-card"><div class="data-number">405</div><div class="data-label">Decision variables<br>per project</div></div>
-      <div class="data-card"><div class="data-number">500<span class="accent">+</span></div><div class="data-label">Financial formulas<br>in the engine</div></div>
-      <div class="data-card"><div class="data-number">574</div><div class="data-label">Automated tests<br>100% pass</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- SOURCES -->
-<section class="sources">
-  <div class="container">
-    <div class="sources-title">Data Sources &amp; Regulatory Standards</div>
-    <div class="sources-list">
-      <span class="source-tag">MahaRERA</span><span class="source-tag">Knight Frank India</span>
-      <span class="source-tag">CBRE South Asia</span><span class="source-tag">JLL India</span>
-      <span class="source-tag">Anarock</span><span class="source-tag">IGR Maharashtra</span>
-      <span class="source-tag">DCPR 2034</span><span class="source-tag">UDCPR 2020</span>
-      <span class="source-tag">COA Standards</span><span class="source-tag">CIDCO Norms</span>
+      <div class="feature-card"><div class="feature-title"><span class="icon">◆</span> Feasibility</div><p>Bring land, project assumptions, development potential and commercial outcomes into the same model before commitment.</p></div>
+      <div class="feature-card"><div class="feature-title"><span class="icon">◆</span> Regulatory Logic</div><p>Keep approvals, development rights and regulatory constraints visible as part of the project model.</p></div>
+      <div class="feature-card"><div class="feature-title"><span class="icon">◆</span> Funding Waterfall</div><p>See how equity, debt, pre-sales and funding pressure move through the project rather than reviewing them in isolation.</p></div>
+      <div class="feature-card"><div class="feature-title"><span class="icon">◆</span> Scenario Comparison</div><p>Compare project strategies side by side and understand how changed assumptions alter the decision.</p></div>
+      <div class="feature-card"><div class="feature-title"><span class="icon">◆</span> Execution Risk</div><p>Connect risk to the stage and assumptions that create it, keeping pressure visible as the project changes.</p></div>
+      <div class="feature-card"><div class="feature-title"><span class="icon">◆</span> Returns</div><p>Read project returns in the context of timing, capital requirements, sales and execution—not as a detached output.</p></div>
     </div>
   </div>
 </section>
@@ -339,7 +313,7 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); background: var(-
   <div class="container">
     <div class="footer-inner">
       <div class="footer-left"><img src="assets/logo_transparent.png" alt="Tesseract"><div><div class="footer-brand">TESSERACT</div><div class="footer-tagline">Real Estate Intelligence</div></div></div>
-      <div class="footer-right">Mumbai, India</div>
+      <div class="footer-right">Twin · Brain · Home · Mumbai, India</div>
     </div>
   </div>
 </footer>
