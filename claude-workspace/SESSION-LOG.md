@@ -2,6 +2,11 @@
 
 Most recent first.
 
+## 2026-07-29 (Cowork, Claude) — v3.3: decision-execution spine, seamless Safari bars
+
+- Spine relabelled per owner: the centre node is the DECISION layer (not "handover"), followed by an EXECUTION segment (blue-to-green gradient line), then Tesseract Home. Story now reads Twin tests → decision → execution → Home runs. Intro copy adjusted.
+- Safari's solid navy bars behind the status bar and URL bar were caused by the fixed `theme-color` meta; removed on all four pages (plus `color-scheme: dark` hint) so Safari samples the real page edge and the top and bottom bars continue the page seamlessly.
+
 ## 2026-07-29 (Cowork, Claude) — v3.2: thesis rebuilt as the lifecycle, mobile polish, main-based deploys
 
 - v3.1 went live: the owner merged `codex/website-redesign` into `main` and pushed; the workflow is now main-based (work on `main`, push, live in ~60s). Docs updated accordingly; the codex branch is retired.
