@@ -45,15 +45,18 @@ This site is the **source of truth** for the Tesseract brand. The resident app (
 
 ---
 
-## Deploy flow
+## Deploy flow (main-based since 2026-07-29)
 
-1. Edit files in this folder
+**`main` is both the working branch and the deploy branch.** GitHub Pages builds from `main`; a push goes live in ~60 seconds.
+
+1. Edit files in this folder (on `main`)
 2. From here:
    ```bash
    git add -A && git commit -m "Update X" && git push
    ```
-3. Branch in use: `codex/website-redesign` (NOT `main`). Push merges via GitHub PR or merge to main when ready.
-4. Live in ~30–60 seconds via GitHub Pages
+3. Live in ~60 seconds via GitHub Pages; hard-refresh to see it.
+
+Push only finalised, locally reviewed changes: there is no staging step between `main` and the live site. The old `codex/website-redesign` working branch was merged into `main` on 2026-07-29 and is retired; do not resurrect it.
 
 **Remote:** `github.com/hacisonline/tesseract-site` (public — required for GitHub Pages).
 
@@ -70,7 +73,7 @@ Nav and footer markup is duplicated across `index.html`, `twin.html`, `home.html
 - Don't add a build step (Vite, Webpack, etc.). The whole point of inline HTML is "edit, push, live."
 - Don't add tracking pixels or analytics without asking.
 - Don't change the cube SVG paths — they're load-bearing for brand consistency with the resident app.
-- Don't push to `main` directly — use the `codex/website-redesign` branch.
+- Don't push half-finished work: `main` deploys straight to the live site. Agents leave changes in the working tree for the owner to review and push.
 
 ---
 

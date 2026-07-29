@@ -27,10 +27,13 @@ Playwright, Chromium, real fonts: all 4 pages at 1440px and 390px, zero console 
 
 ## To publish (owner)
 
-1. Review locally (open `index.html`).
-2. `git add index.html twin.html home.html brain.html assets/ home-architecture-explorer/ claude-workspace/ CLAUDE.md TESSERACT_SITE_RESTRUCTURE_BRIEF.md` — note the explorer folder MUST be tracked now (the Home hero iframes it).
-3. Commit and push on `codex/website-redesign`, then merge to the Pages branch when satisfied.
-4. Optional cleanup: `git rm assets/twin_screenshot.png`, and `draft-v2/` can stay as untracked history or be archived.
+**Workflow since 2026-07-29: work happens directly on `main`, which is the GitHub Pages deploy branch.** After reviewing locally (open `index.html`):
+
+```bash
+git add -A && git commit -m "update" && git push
+```
+
+Live in ~60 seconds; hard-refresh. The `codex/website-redesign` branch was merged into `main` on 2026-07-29 and is retired. The explorer folder (`home-architecture-explorer/`) must stay tracked: the Home hero iframes it. Optional cleanup: `git rm assets/twin_screenshot.png`; `draft-v2/` can stay as untracked history or be archived.
 
 ## Isolation
 

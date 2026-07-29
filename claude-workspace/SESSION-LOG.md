@@ -2,6 +2,13 @@
 
 Most recent first.
 
+## 2026-07-29 (Cowork, Claude) — v3.2: thesis rebuilt as the lifecycle, mobile polish, main-based deploys
+
+- v3.1 went live: the owner merged `codex/website-redesign` into `main` and pushed; the workflow is now main-based (work on `main`, push, live in ~60s). Docs updated accordingly; the codex branch is retired.
+- Thesis section rebuilt after owner critique that it repeated the hero. The two product cards and the reused ecosystem map are gone. In their place: "Every building lives twice." over a purpose-built lifecycle spine, Twin's half (Land / Regulation / Capital / Risk) running into a handover diamond, Home's half (Residents / Staff / Service / Privacy) running out of it, with Tesseract Brain nested inside Home's half. Nav label "Ecosystem" renamed "Thesis" on all pages (anchor id unchanged). ~13 KB of dead CSS from the old map era removed.
+- Mobile polish pass: `viewport-fit=cover` plus safe-area insets on the nav, mobile menu, and footer (notch and home-indicator letterboxing); the nav is now transparent over the hero and gains its glass surface after 24px of scroll on every page; on touch screens, cards illuminate as they pass the viewport's middle band, giving phones the hover treatment desktop gets. Footer carries the brand mark.
+- Verified in iPhone emulation (hover:none path active, middle-band lighting works, nav state toggles) and the full sweep stayed clean: zero console errors, zero overflow, both viewports, all four pages.
+
 ## 2026-07-29 (Cowork, Claude) — v3.1: owner review corrections
 
 - Owner reviewed v3 and flagged three things: Brain must read as part of Tesseract Home (not a nav peer), the hero product panels were unequal in size, and the homepage middle felt like content added to the old page rather than one designed story.

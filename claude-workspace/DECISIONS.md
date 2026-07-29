@@ -2,6 +2,12 @@
 
 Most recent first. One entry per material decision.
 
+## 2026-07-29 — v3.2 owner critiques (thesis, touch, deploys)
+
+- **The thesis section must add information, not restate the hero.** It is now the lifecycle spine under "Every building lives twice.": Twin's half, the handover, Home's half with Brain nested inside. Side-by-side product-card duos are banned on the homepage; the hero already introduces the products.
+- **Touch is first-class.** Any hover-only affordance needs a scroll equivalent on touch screens; the pattern is the `.lit` middle-band illumination driven by IntersectionObserver under `(hover: none)`. Safe areas are handled with `viewport-fit=cover` + `env(safe-area-inset-*)`.
+- **Deploys are main-based.** The owner pushes finalised changes from the terminal; `main` is the deploy branch and there is no staging step. Agents leave work uncommitted for owner review.
+
 ## 2026-07-29 — v3.1 owner review corrections
 
 - **Brain is never a top-level peer.** It does not appear in the primary nav; it is reached through Home (Home chapter banner, Home page band, footer "Brain · inside Home", indented mobile-menu entry). Any future nav change must preserve this.
