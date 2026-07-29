@@ -4,9 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tesseract - Real Estate Intelligence</title>
-<meta name="description" content="Tesseract builds real estate intelligence products before and after the asset exists: Tesseract Twin for strategy, and Tesseract Home for intelligent spaces.">
+<meta name="description" content="Tesseract builds real estate intelligence before and after the building exists: Tesseract Twin for development strategy, Tesseract Home for the lived building, and Tesseract Brain, the upcoming on-site hardware inside Home.">
 <meta name="theme-color" content="#050b14">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="canonical" href="https://hacisonline.github.io/tesseract-site/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tesseract">
+<meta property="og:title" content="Tesseract - Real Estate Intelligence">
+<meta property="og:description" content="One intelligence thesis, two product worlds: Tesseract Twin before commitment, Tesseract Home once the building lives, and Tesseract Brain, the upcoming hardware inside Home.">
+<meta property="og:url" content="https://hacisonline.github.io/tesseract-site/">
+<meta property="og:image" content="https://hacisonline.github.io/tesseract-site/assets/logo_master.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/svg+xml" href="assets/tesseract-mark.svg">
+<link rel="alternate icon" type="image/png" href="assets/logo_transparent.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap">
@@ -178,6 +188,14 @@ a { color: inherit; }
   color: var(--muted-strong);
   text-decoration: none;
   font-weight: 800;
+}
+.mobile-menu a.menu-sub {
+  padding-top: 0;
+  margin-top: -8px;
+  padding-left: 30px;
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 700;
 }
 .section { padding: 104px 0; }
 .section-head {
@@ -928,6 +946,10 @@ a { color: inherit; }
   stroke: rgba(99, 183, 255, 0.46);
   opacity: 0.86;
 }
+.ecosystem[data-active="all"] .twin-node { color: var(--blue-hot); border-color: rgba(99, 183, 255, 0.36); }
+.ecosystem[data-active="all"] .home-node { color: var(--green-hot); border-color: rgba(114, 217, 118, 0.38); }
+.ecosystem[data-active="all"] .line-twin { stroke: rgba(99, 183, 255, 0.5); opacity: 0.9; }
+.ecosystem[data-active="all"] .line-home { stroke: rgba(114, 217, 118, 0.5); opacity: 0.9; }
 .eco-steps { display: grid; gap: 22vh; padding: 42px 0 34px; }
 .eco-copy {
   min-height: 260px;
@@ -1120,10 +1142,10 @@ a { color: inherit; }
 .screenshot-panel.is-active .pin.two { transition-delay: 80ms; }
 .screenshot-panel.is-active .pin.three { transition-delay: 160ms; }
 .screenshot-panel.is-active .pin.four { transition-delay: 240ms; }
-.pin.one { left: 6%; top: 10%; }
-.pin.two { right: 7%; top: 18%; }
-.pin.three { left: 9%; bottom: 12%; }
-.pin.four { right: 8%; bottom: 12%; }
+.pin.one { left: -12px; top: 36%; }
+.pin.two { right: -12px; top: 34px; }
+.pin.three { left: -12px; bottom: 44px; }
+.pin.four { right: -12px; bottom: 44px; }
 .decision-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1207,7 +1229,7 @@ a { color: inherit; }
 }
 .home-principles {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
   gap: 12px;
 }
 .principle {
@@ -1293,8 +1315,247 @@ a { color: inherit; }
 @keyframes lineFlow {
   to { stroke-dashoffset: -180; }
 }
+/* ── 2026-07 refresh additions (thesis duo, chapters, Brain nest, live proof, footer links) ── */
+.eco-duo {
+  display: grid;
+  grid-template-columns: 1.06fr 0.94fr;
+  gap: 44px;
+  align-items: center;
+}
+.eco-duo .ecosystem-map {
+  position: relative;
+  top: auto;
+  min-height: 560px;
+}
+.eco-worlds { display: grid; gap: 14px; align-content: center; }
+.world-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 22px;
+  align-items: center;
+  padding: 24px 26px;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.035);
+  text-decoration: none;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+.world-card:hover { transform: translateY(-3px); background: rgba(12, 26, 45, 0.8); }
+.world-card.twin:hover { border-color: rgba(99, 183, 255, 0.45); }
+.world-card.home:hover { border-color: rgba(114, 217, 118, 0.45); }
+.world-card b {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 1.7rem;
+  font-weight: 600;
+  line-height: 1;
+  color: rgba(99, 183, 255, 0.12);
+  -webkit-text-stroke: 1px rgba(99, 183, 255, 0.6);
+}
+.world-card.home b {
+  color: rgba(114, 217, 118, 0.12);
+  -webkit-text-stroke-color: rgba(114, 217, 118, 0.6);
+}
+.wc-body small {
+  display: block;
+  color: var(--blue-hot);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.world-card.home .wc-body small { color: var(--green-hot); }
+.wc-body strong {
+  display: block;
+  margin-top: 6px;
+  color: var(--ink);
+  font-size: 1.35rem;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+.wc-body > span { display: block; margin-top: 7px; color: var(--muted); font-size: 0.9rem; }
+.world-card i {
+  color: var(--muted);
+  font-family: "JetBrains Mono", monospace;
+  font-style: normal;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.world-card:hover i { transform: translateY(3px); color: var(--ink); }
+.eco-note { margin-top: 8px; padding: 0 4px; color: var(--muted); font-size: 0.92rem; max-width: 560px; }
+.eco-note a {
+  color: var(--green-hot);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(114, 217, 118, 0.4);
+  transition: border-color 0.2s ease;
+}
+.eco-note a:hover { border-color: var(--green-hot); }
+.chapter-head {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 20px 34px;
+  align-items: start;
+  margin-bottom: 46px;
+}
+.chapter-no {
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 600;
+  font-size: clamp(2.6rem, 5vw, 4rem);
+  line-height: 0.9;
+  padding-top: 6px;
+  color: rgba(99, 183, 255, 0.12);
+  -webkit-text-stroke: 1.2px rgba(99, 183, 255, 0.5);
+}
+.chapter-head.green .chapter-no {
+  color: rgba(114, 217, 118, 0.12);
+  -webkit-text-stroke-color: rgba(114, 217, 118, 0.5);
+}
+.chapter-head.green .eyebrow { color: var(--green-hot); }
+.chapter-body .section-title { margin-top: 12px; max-width: 760px; }
+.chapter-body .section-desc { margin-top: 16px; }
+.chapter-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
+.panel-nest {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 16px;
+  padding-top: 13px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--muted);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+.panel-nest i {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--green-hot);
+  background: rgba(76, 175, 80, 0.35);
+}
+.hero-product-panel.twin .panel-nest i {
+  border-color: var(--blue-hot);
+  background: rgba(74, 158, 245, 0.35);
+}
+.flow-cta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+.data-chips {
+  margin-top: 44px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.data-chips span {
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(99, 183, 255, 0.18);
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--muted-strong);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+.data-chips b { color: var(--blue-hot); font-weight: 700; }
+.brain-inline {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 14px;
+  padding: 18px 20px;
+  border-radius: 24px;
+  border: 1px solid rgba(114, 217, 118, 0.3);
+  background:
+    linear-gradient(135deg, rgba(76, 175, 80, 0.09), transparent 55%),
+    rgba(5, 11, 20, 0.6);
+  color: var(--ink);
+  text-decoration: none;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.brain-inline:hover { transform: translateY(-2px); border-color: rgba(114, 217, 118, 0.55); }
+.brain-inline img { width: 38px; height: 38px; object-fit: contain; }
+.brain-inline .bi-text { min-width: 0; }
+.brain-inline .bi-text small {
+  display: block;
+  color: var(--green-hot);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.brain-inline .bi-text strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.98rem;
+  letter-spacing: -0.01em;
+}
+.brain-inline .bi-arrow {
+  margin-left: auto;
+  color: var(--green-hot);
+  font-family: "JetBrains Mono", monospace;
+  transition: transform 0.2s ease;
+}
+.brain-inline:hover .bi-arrow { transform: translateX(4px); }
+.live-proof {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 24px;
+  align-items: center;
+  margin-top: 14px;
+  padding: 24px 26px;
+  border-radius: 26px;
+  border: 1px solid rgba(114, 217, 118, 0.2);
+  background: rgba(255, 255, 255, 0.03);
+}
+.live-proof .lp-index {
+  color: var(--green-hot);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+.live-proof small {
+  display: block;
+  color: var(--muted);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.live-proof strong {
+  display: block;
+  margin-top: 5px;
+  font-size: 1.14rem;
+  letter-spacing: -0.02em;
+}
+.live-proof .lp-note {
+  max-width: 400px;
+  color: var(--muted);
+  font-size: 0.86rem;
+  text-align: right;
+}
+.footer-links {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.footer-links a {
+  color: var(--muted-strong);
+  text-decoration: none;
+  font-size: 0.84rem;
+  font-weight: 700;
+  transition: color 0.2s ease;
+}
+.footer-links a:hover { color: var(--ink); }
 @media (max-width: 980px) {
-  .hero-layout, .section-head, .product-grid, .ecosystem-scroll, .twin-explainer, .home-layout {
+  .hero-layout, .section-head, .product-grid, .ecosystem-scroll, .twin-explainer, .home-layout, .eco-duo {
     grid-template-columns: 1fr;
   }
   .hero-orbit { min-height: 460px; }
@@ -1305,6 +1566,7 @@ a { color: inherit; }
   }
   .eco-steps { gap: 18px; padding-top: 0; }
   .decision-grid, .builder-grid { grid-template-columns: 1fr 1fr; }
+  .home-principles { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 760px) {
   .container { width: min(100% - 28px, 1180px); }
@@ -1355,10 +1617,22 @@ a { color: inherit; }
   .ecosystem-map { min-height: 440px; border-radius: 30px; }
   .eco-core { width: 118px; height: 118px; border-radius: 28px; }
   .eco-node { min-width: 88px; font-size: 0.68rem; padding: 8px 9px; }
-  .flow-card { grid-template-columns: 1fr; }
+  .flow-card { grid-template-columns: 1fr; transform: translateY(var(--diagram-lift)); }
   .pin { position: static; width: auto; margin-top: 10px; }
   .screenshot-panel { padding: 12px; }
   .footer-inner { flex-direction: column; }
+  .panel-nest { display: none; }
+  .live-proof { grid-template-columns: auto 1fr; row-gap: 12px; padding: 18px; }
+  .live-proof .lp-note { grid-column: 1 / -1; max-width: none; text-align: left; }
+  .brain-inline { padding: 14px 16px; }
+  .data-chips span { font-size: 0.68rem; padding: 8px 11px; }
+  .eco-duo { gap: 24px; }
+  .eco-duo .ecosystem-map { min-height: 440px; }
+  .world-card { padding: 18px 18px; border-radius: 22px; gap: 16px; }
+  .wc-body strong { font-size: 1.12rem; }
+  .wc-body > span { font-size: 0.84rem; }
+  .chapter-head { gap: 12px 18px; margin-bottom: 34px; }
+  .chapter-no { font-size: 2rem; -webkit-text-stroke-width: 1px; padding-top: 2px; }
 }
 </style>
 </head>
@@ -1370,10 +1644,10 @@ a { color: inherit; }
       <span>TESSERACT</span>
     </a>
     <div class="nav-links">
-      <a href="#ecosystem">Ecosystem</a>
-      <a href="#foundation">Foundation</a>
       <a href="twin.html">Twin</a>
       <a href="home.html">Home</a>
+      <a href="#ecosystem">Ecosystem</a>
+      <a href="#foundation">Foundation</a>
     </div>
     <a href="#contact" class="nav-cta">Start a conversation</a>
     <button class="menu-button" id="menuButton" aria-label="Open menu" aria-expanded="false">
@@ -1382,10 +1656,11 @@ a { color: inherit; }
   </div>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#ecosystem">Ecosystem</a>
-  <a href="#foundation">Foundation</a>
   <a href="twin.html">Twin</a>
   <a href="home.html">Home</a>
+  <a class="menu-sub" href="brain.html">↳ Brain · inside Home</a>
+  <a href="#ecosystem">Ecosystem</a>
+  <a href="#foundation">Foundation</a>
   <a href="#contact">Contact</a>
 </div>
 
@@ -1421,24 +1696,26 @@ a { color: inherit; }
             <span class="panel-kicker">Development Strategy</span>
             <b>Explore Tesseract Twin</b>
             <span class="panel-subtitle">The B2B Platform</span>
-            <span class="panel-copy">Model feasibility, approvals, funding pressure, risk, and returns before capital is committed.</span>
+            <span class="panel-copy">Model feasibility, approvals, funding, and execution risk before capital is committed.</span>
             <span class="panel-points">
               <span>FSI / TDR</span>
               <span>Cashflow</span>
               <span>Risk scoring</span>
             </span>
+            <span class="panel-nest"><i></i>Now at V7.0 · 574 automated tests</span>
             <em>Enter Twin <span class="arrow">→</span></em>
           </a>
           <a class="hero-product-panel home" href="home.html">
             <span class="panel-kicker">Living Intelligence</span>
             <b>Explore Tesseract Home</b>
             <span class="panel-subtitle">The Home Platform</span>
-            <span class="panel-copy">Connect comfort, service, access, privacy, and building operations after delivery.</span>
+            <span class="panel-copy">One living model of the building: residents, staff, management, and local intelligence.</span>
             <span class="panel-points">
-              <span>Comfort</span>
-              <span>Service</span>
+              <span>One twin</span>
               <span>Privacy-first</span>
+              <span>Local AI</span>
             </span>
+            <span class="panel-nest"><i></i>Inside: Tesseract Brain · upcoming hardware</span>
             <em>Enter Home <span class="arrow">→</span></em>
           </a>
         </div>
@@ -1446,17 +1723,17 @@ a { color: inherit; }
     </div>
   </section>
 
-  <section class="ecosystem" id="ecosystem" data-active="reality">
+  <section class="ecosystem" id="ecosystem" data-active="all">
     <div class="container">
       <div class="ecosystem-intro reveal">
-        <div class="eyebrow">Ecosystem</div>
+        <div class="eyebrow">The Thesis</div>
         <h2>One intelligence thesis. Two product worlds.</h2>
         <p>
-          Real estate has hidden complexity before the asset exists and hidden friction after it is occupied. The ecosystem makes both sides visible without forcing them into one generic platform.
+          Real estate hides complexity before the asset exists and friction after it is occupied. Tesseract makes both visible: one world for the decision, one for the lived building.
         </p>
       </div>
-      <div class="ecosystem-scroll">
-        <div class="ecosystem-map diagram-live" aria-label="Interactive Tesseract ecosystem map">
+      <div class="eco-duo">
+        <div class="ecosystem-map diagram-live reveal" aria-label="The Tesseract ecosystem: development forces above, living-building forces below, one core">
           <svg class="map-svg" viewBox="0 0 600 600" preserveAspectRatio="none" aria-hidden="true">
             <line class="line-twin" x1="300" y1="300" x2="110" y2="120"></line>
             <line class="line-twin" x1="300" y1="300" x2="300" y2="76"></line>
@@ -1482,58 +1759,135 @@ a { color: inherit; }
           <div class="eco-node home-node node-privacy">Privacy</div>
           <div class="eco-node home-node node-comfort">Comfort</div>
         </div>
-        <div class="eco-steps">
-          <article class="eco-copy active" data-state="reality">
-            <small>01 / Project Reality</small>
-            <h3>The messy parts are the important parts.</h3>
-            <p>Real estate decisions are shaped by regulation, capital, timing, construction, sales, operations, and service. Tesseract starts by mapping those forces instead of hiding them behind vague product language.</p>
-          </article>
-          <article class="eco-copy" data-state="twin">
-            <small>02 / Tesseract Twin</small>
-            <h3>Before commitment, the Strategy Platform lights up.</h3>
-            <p>Twin connects land, FSI, TDR, approvals, cost, debt, sales, shortfall, risk, and returns so a project can be tested before capital is committed.</p>
-            <a class="eco-product-cta twin-cta" href="twin.html" aria-label="View Tesseract Twin beta">
-              <img src="assets/logo_transparent.png" alt="" aria-hidden="true">
-              <span>
-                <strong>View TESSERACT TWIN beta</strong>
-                <span class="cta-meta">Strategy Platform</span>
-              </span>
-              <span class="cta-arrow" aria-hidden="true">→</span>
-            </a>
-          </article>
-          <article class="eco-copy" data-state="home">
-            <small>03 / Tesseract Home</small>
-            <h3>After delivery, the Home Platform takes over.</h3>
-            <p>Home connects comfort, access, service, maintenance, privacy, and building intelligence into a lived experience that feels calmer than a stack of apps.</p>
-            <a class="eco-product-cta home-cta" href="home.html" aria-label="View Tesseract Home">
-              <img src="assets/logo_transparent.png" alt="" aria-hidden="true">
-              <span>
-                <strong>View TESSERACT HOME</strong>
-                <span class="cta-meta">Home Platform</span>
-              </span>
-              <span class="cta-arrow" aria-hidden="true">→</span>
-            </a>
-          </article>
-          <article class="eco-copy" data-state="all">
-            <small>04 / The Ecosystem</small>
-            <h3>Separate products. Shared operating belief.</h3>
-            <p>The products remain distinct, but the company thesis is shared: make hidden real estate complexity visible, connected, and usable.</p>
-          </article>
+        <div class="eco-worlds">
+          <a class="world-card twin reveal" href="#twin-live">
+            <b>01</b>
+            <span class="wc-body">
+              <small>Before the building</small>
+              <strong>Tesseract Twin</strong>
+              <span>Land, regulation, capital, and execution risk, tested before commitment.</span>
+            </span>
+            <i aria-hidden="true">↓</i>
+          </a>
+          <a class="world-card home reveal" href="#home-live">
+            <b>02</b>
+            <span class="wc-body">
+              <small>Once the building lives</small>
+              <strong>Tesseract Home</strong>
+              <span>Residents, staff, management, and services in one living model.</span>
+            </span>
+            <i aria-hidden="true">↓</i>
+          </a>
+          <p class="eco-note reveal">Not two platforms forced into one. One thesis, expressed twice: make hidden complexity visible, connected, and usable. And inside Home, upcoming: <a href="brain.html">Tesseract Brain</a>, the hardware that keeps the building's intelligence on site.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="twin-live">
+    <div class="container">
+      <div class="chapter-head reveal">
+        <span class="chapter-no" aria-hidden="true">01</span>
+        <div class="chapter-body">
+          <div class="eyebrow">Tesseract Twin · Now at V7.0</div>
+          <h2 class="section-title">The whole project, before commitment.</h2>
+          <p class="section-desc">A digital twin of the Mumbai development lifecycle. What you see below is the live product with a sample scenario loaded, not a mockup.</p>
+        </div>
+      </div>
+      <div class="twin-explainer">
+        <div class="flow diagram-live">
+          <div class="flow-card">
+            <b>01 · Model</b>
+            <div>
+              <h3>Every mechanic, connected</h3>
+              <p>Zones, FSI and TDR, approvals, construction phasing, and the funding waterfall in one engine.</p>
+            </div>
+          </div>
+          <div class="flow-card">
+            <b>02 · Stress</b>
+            <div>
+              <h3>Risk you can see</h3>
+              <p>Per-stage risk scores, automatic shortfall detection, and Monte Carlo analysis across 1,000 scenarios.</p>
+            </div>
+          </div>
+          <div class="flow-card">
+            <b>03 · Decide</b>
+            <div>
+              <h3>Numbers, then commitment</h3>
+              <p>Pre-tax and post-tax KPIs, side-by-side compare mode, and a boardroom-ready PDF report.</p>
+            </div>
+          </div>
+          <div class="flow-cta">
+            <a href="twin.html" class="btn">Enter Tesseract Twin</a>
+            <a href="https://hacisonline.github.io/REbuildlog/" target="_blank" rel="noopener" class="btn secondary">View the build log</a>
+          </div>
+        </div>
+        <div class="screenshot-panel diagram-live">
+          <img src="assets/twin_v7_model.webp" alt="Tesseract Twin V7.0 with a sample scenario: KPI tiles, composite risk score, and the six-stage project roadmap" loading="lazy">
+          <div class="pin one">Shortfall detected and sized</div>
+          <div class="pin four">Every stage scored, live</div>
+        </div>
+      </div>
+      <div class="data-chips reveal">
+        <span><b>9</b> zones modelled</span>
+        <span><b>405</b> decision variables</span>
+        <span><b>500+</b> financial formulas</span>
+        <span><b>574</b> automated tests</span>
+        <span>Single-file, offline-first</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section home-strip" id="home-live">
+    <div class="container">
+      <div class="chapter-head green reveal">
+        <span class="chapter-no" aria-hidden="true">02</span>
+        <div class="chapter-body">
+          <div class="eyebrow">Tesseract Home · Living Intelligence</div>
+          <h2 class="section-title">The building, once it lives.</h2>
+          <p class="section-desc">One living model of the building. Residents, staff desks, management, and sensors feed a single digital twin, and questions are answered inside the building, on its own hardware. The full architecture runs live on the Home page.</p>
+          <div class="chapter-cta">
+            <a href="home.html" class="btn">Enter Tesseract Home</a>
+            <a href="home.html#architecture" class="btn secondary">See the live architecture</a>
+          </div>
+        </div>
+      </div>
+      <div class="home-principles reveal">
+        <div class="principle"><b>One digital twin</b><span>Surfaces and sensors feed a single living model, not a stack of disconnected apps.</span></div>
+        <div class="principle"><b>Identity gate</b><span>Every request is bound to the person asking. Deny by default.</span></div>
+        <div class="principle"><b>Grounded answers</b><span>Retrieval first, over the building's own records. An honest miss beats a guess.</span></div>
+        <div class="principle"><b>Three egress paths</b><span>A payment token, a visitor pass, an encrypted backup. Nothing else leaves.</span></div>
+      </div>
+      <a class="brain-inline reveal" href="brain.html">
+        <img src="assets/logo_transparent.png" alt="">
+        <span class="bi-text">
+          <small>Inside Home · Upcoming hardware</small>
+          <strong>Tesseract Brain, the building's own server</strong>
+        </span>
+        <span class="bi-arrow">→</span>
+      </a>
+      <div class="live-proof reveal">
+        <span class="lp-index">LIVE / 01</span>
+        <div>
+          <small>First Tesseract Home deployment</small>
+          <strong>The Presidential by Webtech Realty</strong>
+        </div>
+        <span class="lp-note">Home running white-label as the tower's own branded experience, in active build in Mumbai. Proof, not a promise.</span>
       </div>
     </div>
   </section>
 
   <section class="section foundation-section" id="foundation">
     <div class="container">
-      <div class="section-head reveal">
-        <div>
-          <div class="eyebrow">Foundation</div>
+      <div class="chapter-head reveal">
+        <span class="chapter-no" aria-hidden="true">03</span>
+        <div class="chapter-body">
+          <div class="eyebrow">The Foundation</div>
           <h2 class="section-title">Built by builders, not consultants.</h2>
+          <p class="section-desc">
+            Tesseract is built from live real-estate work, not abstract software positioning. The Strategy Platform is grounded in Mumbai project mechanics, regulatory pressure, and capital at stake.
+          </p>
         </div>
-        <p class="section-desc">
-          Tesseract is built from live real-estate work, not abstract software positioning. The Strategy Platform is grounded in Mumbai project mechanics, regulatory pressure, and capital at stake.
-        </p>
       </div>
       <div class="builder-grid">
         <div class="builder-proof reveal"><b>01</b><span>On-ground data from active Mumbai development projects used to calibrate model assumptions.</span></div>
@@ -1549,7 +1903,7 @@ a { color: inherit; }
       <div class="cta-panel reveal">
         <div class="eyebrow">Start Here</div>
         <h2>See the product that fits your moment.</h2>
-        <p>Twin explains the project before commitment. Home shapes the intelligent experience after delivery.</p>
+        <p>Twin explains the project before commitment. Home runs the lived building after delivery, with Brain inside, keeping its intelligence on site.</p>
         <div class="hero-actions" style="justify-content: center;">
           <a href="mailto:harshitchhajed@gmail.com?subject=Tesseract%20Twin%20beta" class="btn">Request Twin beta access</a>
           <a href="mailto:harshitchhajed@gmail.com?subject=Tesseract%20Home%20platform" class="btn secondary">Discuss Home platform</a>
@@ -1561,8 +1915,14 @@ a { color: inherit; }
 
 <footer class="footer">
   <div class="container footer-inner">
-    <span>TESSERACT - Real Estate Intelligence</span>
-    <span>Mumbai, India - Local draft, not published</span>
+    <span>TESSERACT · Real Estate Intelligence</span>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="twin.html">Twin</a>
+      <a href="home.html">Home</a>
+      <a href="brain.html">Brain · inside Home</a>
+      <a href="https://hacisonline.github.io/REbuildlog/" target="_blank" rel="noopener">Build Log</a>
+    </nav>
+    <span>Mumbai, India</span>
   </div>
 </footer>
 
@@ -1659,20 +2019,6 @@ document.addEventListener('DOMContentLoaded', () => {
   updateLiveDiagrams();
   window.addEventListener('scroll', requestDiagramUpdate, { passive: true });
   window.addEventListener('resize', requestDiagramUpdate);
-
-  const ecosystem = document.getElementById('ecosystem');
-  const steps = document.querySelectorAll('.eco-copy');
-  const stepObserver = new IntersectionObserver((entries) => {
-    const visible = entries
-      .filter((entry) => entry.isIntersecting)
-      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-    if (!visible) return;
-    const active = visible.target.dataset.state;
-    ecosystem.dataset.active = active;
-    steps.forEach((step) => step.classList.toggle('active', step.dataset.state === active));
-  }, { threshold: [0.45, 0.6, 0.75], rootMargin: '-18% 0px -28% 0px' });
-
-  steps.forEach((step) => stepObserver.observe(step));
 
   const scrollToHash = (hash, behavior = 'smooth') => {
     if (!hash || hash === '#') return;

@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tesseract Brain - The Building's Own Server</title>
+<meta name="description" content="Tesseract Brain is upcoming hardware within Tesseract Home: one device in the building that runs the app, the records, and the language model on site, and greets the lobby as an AI reception. No data leaves except a payment token, a visitor pass, and an encrypted backup.">
+<meta name="theme-color" content="#050b14">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="canonical" href="https://hacisonline.github.io/tesseract-site/brain.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tesseract">
+<meta property="og:title" content="Tesseract Brain - The Building's Own Server">
+<meta property="og:description" content="Upcoming hardware within Tesseract Home: the building's app, records, and intelligence, running on the building's own device.">
+<meta property="og:url" content="https://hacisonline.github.io/tesseract-site/brain.html">
+<meta property="og:image" content="https://hacisonline.github.io/tesseract-site/assets/logo_master.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/svg+xml" href="assets/tesseract-mark.svg">
+<link rel="alternate icon" type="image/png" href="assets/logo_transparent.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --deep: #050b14;
+  --navy: #081422;
+  --navy-2: #0c1a2d;
+  --panel: #0f2036;
+  --panel-soft: #142840;
+  --ink: #f4f8ff;
+  --muted: #8da1b9;
+  --muted-strong: #c6d4e7;
+  --blue: #4a9ef5;
+  --blue-hot: #63b7ff;
+  --green: #4caf50;
+  --green-hot: #72d976;
+  --line: rgba(99, 183, 255, 0.16);
+  --line-strong: rgba(99, 183, 255, 0.35);
+  --green-line: rgba(114, 217, 118, 0.24);
+  --shadow: 0 34px 90px rgba(0, 0, 0, 0.36);
+}
+html { scroll-behavior: smooth; font-size: 16px; background: var(--deep); }
+body {
+  min-height: 100vh;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 20% 6%, rgba(76, 175, 80, 0.13), transparent 30rem),
+    radial-gradient(circle at 84% 22%, rgba(74, 158, 245, 0.11), transparent 26rem),
+    linear-gradient(180deg, var(--deep) 0%, #07111d 44%, var(--deep) 100%);
+  background-color: var(--deep);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.38;
+  background-image:
+    linear-gradient(rgba(99, 183, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99, 183, 255, 0.035) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(180deg, #000, transparent 78%);
+}
+a { color: inherit; }
+.container { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--green-hot);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.eyebrow::before {
+  content: "";
+  width: 30px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--blue), var(--green-hot));
+}
+.nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(5, 11, 20, 0.74);
+  backdrop-filter: blur(22px);
+}
+.nav-inner {
+  height: 74px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand img { width: 36px; height: 36px; object-fit: contain; }
+.brand span { font-size: 1.02rem; font-weight: 700; letter-spacing: 0.14em; }
+.nav-links { display: flex; align-items: center; gap: 28px; }
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 700;
+  transition: color 0.2s ease;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-links a.active { color: var(--green-hot); }
+.nav-cta, .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 0 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(99, 183, 255, 0.28);
+  background: linear-gradient(135deg, rgba(74, 158, 245, 0.22), rgba(76, 175, 80, 0.12));
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 0.92rem;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+.nav-cta:hover, .btn:hover {
+  transform: translateY(-2px);
+  border-color: rgba(99, 183, 255, 0.55);
+  background: linear-gradient(135deg, rgba(74, 158, 245, 0.32), rgba(76, 175, 80, 0.18));
+}
+.btn.green {
+  border-color: rgba(114, 217, 118, 0.32);
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.24), rgba(74, 158, 245, 0.1));
+}
+.btn.green:hover { border-color: rgba(114, 217, 118, 0.6); }
+.btn.secondary {
+  background: rgba(255, 255, 255, 0.035);
+  border-color: rgba(255, 255, 255, 0.11);
+  color: var(--muted-strong);
+}
+.menu-button {
+  display: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+}
+.menu-button span { display: block; width: 20px; height: 2px; margin: 5px auto; background: var(--ink); }
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 82px;
+  left: 20px;
+  right: 20px;
+  z-index: 49;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  background: rgba(8, 20, 34, 0.96);
+  box-shadow: var(--shadow);
+}
+.mobile-menu.open { display: grid; }
+.mobile-menu a { padding: 14px; color: var(--muted-strong); text-decoration: none; font-weight: 800; }
+.mobile-menu a.menu-sub {
+  padding-top: 0;
+  margin-top: -8px;
+  padding-left: 30px;
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+.section { padding: 104px 0; }
+.section-head {
+  display: grid;
+  grid-template-columns: 0.86fr 1fr;
+  gap: 48px;
+  align-items: end;
+  margin-bottom: 44px;
+}
+.section-title {
+  margin-top: 14px;
+  font-size: clamp(2rem, 3.5vw, 2.9rem);
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
+.section-desc { color: var(--muted); font-size: 1.02rem; max-width: 640px; }
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* HERO */
+.brain-hero { padding: 168px 0 96px; }
+.brain-hero-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 52px;
+  align-items: center;
+}
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin-bottom: 30px;
+  transition: color 0.2s ease, gap 0.2s ease;
+}
+.back-link:hover { color: var(--green-hot); gap: 12px; }
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 15px;
+  border-radius: 999px;
+  border: 1px solid rgba(114, 217, 118, 0.35);
+  background: rgba(5, 11, 20, 0.7);
+  color: var(--green-hot);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.status-chip i {
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--green-hot);
+  background: rgba(76, 175, 80, 0.4);
+  animation: chipPulse 2.6s ease-in-out infinite;
+}
+@keyframes chipPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.brain-hero h1 {
+  margin-top: 20px;
+  font-size: clamp(2.8rem, 6vw, 4.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+}
+.brain-hero h1 span { color: var(--green-hot); }
+.brain-hero .lede {
+  margin-top: 22px;
+  max-width: 540px;
+  color: var(--muted);
+  font-size: 1.04rem;
+  line-height: 1.75;
+}
+.brain-hero .lede b { color: var(--muted-strong); font-weight: 700; }
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 32px; }
+.micro-line {
+  margin-top: 36px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--muted);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* SYSTEM VISUAL */
+.system-visual {
+  position: relative;
+  border-radius: 34px;
+  border: 1px solid rgba(114, 217, 118, 0.24);
+  background:
+    radial-gradient(circle at 50% 45%, rgba(76, 175, 80, 0.08), transparent 18rem),
+    linear-gradient(180deg, rgba(15, 32, 54, 0.8), rgba(5, 11, 20, 0.75));
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  padding: 24px;
+}
+.system-visual::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image:
+    linear-gradient(rgba(99, 183, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99, 183, 255, 0.045) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(circle at 50% 45%, #000, transparent 75%);
+}
+.sv-head {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 2px 4px 16px;
+  color: var(--muted);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+}
+.sv-head b { color: var(--green-hot); font-weight: 600; }
+.sv-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1.25fr 1fr;
+  gap: 14px;
+  align-items: center;
+  border: 1px solid rgba(99, 183, 255, 0.22);
+  border-radius: 22px;
+  padding: 22px 18px;
+  background: rgba(5, 11, 20, 0.5);
+}
+.sv-col { display: grid; gap: 12px; }
+.module {
+  position: relative;
+  padding: 14px 15px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(12, 26, 45, 0.8);
+}
+.module small {
+  display: block;
+  color: var(--muted);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.54rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+.module strong { display: block; margin-top: 5px; font-size: 0.86rem; letter-spacing: -0.01em; }
+.module.hot { border-color: rgba(114, 217, 118, 0.4); }
+.module.hot small { color: var(--green-hot); }
+.sv-core { position: relative; display: grid; place-items: center; min-height: 300px; }
+.sv-core svg.rings {
+  position: absolute;
+  width: min(280px, 100%);
+  height: auto;
+}
+.sv-core .ring-dash {
+  fill: none;
+  stroke: rgba(114, 217, 118, 0.35);
+  stroke-width: 1.1;
+  stroke-dasharray: 5 9;
+  transform-origin: center;
+  animation: ringSpin 16s linear infinite;
+}
+.sv-core .ring-dash.two {
+  stroke: rgba(99, 183, 255, 0.28);
+  animation-duration: 26s;
+  animation-direction: reverse;
+}
+@keyframes ringSpin { to { transform: rotate(360deg); } }
+.sv-mark { position: relative; z-index: 1; width: min(150px, 34vw); }
+.sv-mark svg { display: block; width: 100%; animation: markBreathe 5s ease-in-out infinite; }
+@keyframes markBreathe {
+  0%, 100% { opacity: 0.85; transform: scale(0.985); }
+  50% { opacity: 1; transform: scale(1); }
+}
+.sv-core-label {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  color: var(--green-hot);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+}
+.sv-rail {
+  position: relative;
+  height: 1px;
+  margin: 20px 6px 6px;
+  background: linear-gradient(90deg, transparent, rgba(230, 181, 102, 0.55), transparent);
+}
+.sv-rail .packet {
+  position: absolute;
+  top: -3.5px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #e6b566;
+  box-shadow: 0 0 10px rgba(230, 181, 102, 0.7);
+  animation: packetRun 4.4s linear infinite;
+}
+.sv-rail .packet.two { animation-delay: 1.5s; }
+.sv-rail .packet.three { animation-delay: 3s; }
+@keyframes packetRun {
+  0% { left: 12%; opacity: 0; }
+  12% { opacity: 1; }
+  88% { opacity: 1; }
+  100% { left: 86%; opacity: 0; }
+}
+.sv-rail-label {
+  margin: 10px 6px 0;
+  color: var(--muted);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+.sv-rail-label b { color: #e6b566; font-weight: 600; }
+
+/* STACK CARDS */
+.stack-section { border-top: 1px solid var(--line); background: rgba(8, 20, 34, 0.72); }
+.stack-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.stack-card {
+  min-height: 230px;
+  padding: 24px;
+  border-radius: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.035);
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+.stack-card:hover { transform: translateY(-4px); border-color: rgba(114, 217, 118, 0.35); }
+.stack-card b {
+  display: block;
+  color: var(--green-hot);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+.stack-card strong { display: block; margin-top: 12px; font-size: 1.06rem; letter-spacing: -0.015em; }
+.stack-card p { margin-top: 9px; color: var(--muted); font-size: 0.88rem; line-height: 1.62; }
+
+/* RECEPTION */
+.reception-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 46px;
+  align-items: center;
+}
+.reception-copy p { margin-top: 18px; color: var(--muted); font-size: 1rem; max-width: 500px; }
+.reception-copy p b { color: var(--muted-strong); }
+.reception-steps { display: grid; gap: 12px; }
+.reception-step {
+  display: grid;
+  grid-template-columns: 74px 1fr;
+  gap: 16px;
+  padding: 20px 22px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.03);
+}
+.reception-step b {
+  color: var(--green-hot);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  padding-top: 3px;
+}
+.reception-step strong { display: block; font-size: 1rem; letter-spacing: -0.01em; }
+.reception-step span { display: block; margin-top: 4px; color: var(--muted); font-size: 0.88rem; }
+
+/* BOUNDARY STRIP */
+.boundary-section { border-top: 1px solid var(--line); background:
+  radial-gradient(circle at 22% 30%, rgba(230, 181, 102, 0.06), transparent 24rem),
+  rgba(8, 20, 34, 0.72); }
+.boundary-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.boundary-card {
+  padding: 22px;
+  border-radius: 24px;
+  border: 1px solid rgba(230, 181, 102, 0.22);
+  background: rgba(5, 11, 20, 0.55);
+}
+.boundary-card b {
+  display: block;
+  color: #e6b566;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+.boundary-card strong { display: block; margin-top: 10px; font-size: 0.98rem; }
+.boundary-card span { display: block; margin-top: 6px; color: var(--muted); font-size: 0.84rem; }
+.boundary-card.keeps { border-color: rgba(114, 217, 118, 0.3); }
+.boundary-card.keeps b { color: var(--green-hot); }
+.honesty {
+  margin-top: 44px;
+  padding: 22px 26px;
+  border-radius: 24px;
+  border: 1px dashed rgba(255, 255, 255, 0.18);
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+.honesty b { color: var(--muted-strong); }
+
+/* RETURN BAND + FOOTER */
+.return-band {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 26px;
+  align-items: center;
+  padding: clamp(28px, 4.5vw, 48px);
+  border-radius: 34px;
+  border: 1px solid rgba(114, 217, 118, 0.3);
+  background:
+    radial-gradient(circle at 18% 30%, rgba(76, 175, 80, 0.14), transparent 20rem),
+    rgba(15, 32, 54, 0.6);
+}
+.return-band small {
+  color: var(--green-hot);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.return-band h2 {
+  margin-top: 10px;
+  font-size: clamp(1.7rem, 3.4vw, 2.7rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+.footer { padding: 34px 0; border-top: 1px solid rgba(255, 255, 255, 0.08); }
+.footer-inner { display: flex; justify-content: space-between; gap: 20px; color: var(--muted); font-size: 0.86rem; }
+.footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+.footer-links a { color: var(--muted-strong); text-decoration: none; font-size: 0.84rem; font-weight: 700; transition: color 0.2s ease; }
+.footer-links a:hover { color: var(--ink); }
+
+@media (max-width: 980px) {
+  .brain-hero-grid, .section-head, .reception-grid { grid-template-columns: 1fr; }
+  .brain-hero { padding: 140px 0 72px; }
+  .stack-grid, .boundary-strip { grid-template-columns: 1fr 1fr; }
+  .return-band { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .container { width: min(100% - 28px, 1180px); }
+  .nav-links, .nav-cta { display: none; }
+  .menu-button { display: block; }
+  .nav-inner { height: 68px; }
+  .brain-hero { padding: 122px 0 60px; }
+  .section { padding: 76px 0; }
+  .stack-grid, .boundary-strip { grid-template-columns: 1fr; }
+  .stack-card { min-height: 0; }
+  .sv-grid { grid-template-columns: 1fr 1fr; }
+  .sv-core { grid-column: 1 / -1; grid-row: 2; min-height: 250px; }
+  .footer-inner { flex-direction: column; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .sv-mark svg, .ring-dash, .sv-rail .packet, .status-chip i { animation: none; }
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="brand" aria-label="Tesseract home">
+      <img src="assets/logo_transparent.png" alt="">
+      <span>TESSERACT</span>
+    </a>
+    <div class="nav-links">
+      <a href="twin.html">Twin</a>
+      <a href="home.html" class="active">Home</a>
+      <a href="index.html#ecosystem">Ecosystem</a>
+      <a href="index.html#foundation">Foundation</a>
+    </div>
+    <a href="index.html#contact" class="nav-cta">Start a conversation</a>
+    <button class="menu-button" id="menuButton" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="twin.html">Twin</a>
+  <a href="home.html" class="active">Home</a>
+  <a class="menu-sub" href="brain.html">↳ Brain · inside Home</a>
+  <a href="index.html#ecosystem">Ecosystem</a>
+  <a href="index.html#foundation">Foundation</a>
+  <a href="index.html#contact">Contact</a>
+</div>
+
+<main>
+  <section class="brain-hero">
+    <div class="container brain-hero-grid">
+      <div>
+        <a href="home.html" class="back-link">← Inside Tesseract Home</a>
+        <div class="status-chip"><i></i>In development · Upcoming hardware</div>
+        <h1>Tesseract <span>Brain.</span></h1>
+        <p class="lede">
+          The building's own server. One device, installed in the building it serves,
+          that runs Tesseract Home entirely on site: <b>the app, the records, the twin,
+          and the language model</b>. And at the front desk, its public face: an AI
+          reception that greets the building's people.
+        </p>
+        <div class="hero-actions">
+          <a href="#role" class="btn green">Explore the system role</a>
+          <a href="home.html" class="btn secondary">Return to Home</a>
+        </div>
+        <div class="micro-line">Building-local · Grounded answers · Cloud optional, logged</div>
+      </div>
+      <div class="system-visual reveal" aria-label="System role of Tesseract Brain: the app, records, local model, and reception run on the device; only a payment token, visitor pass, and encrypted backup leave">
+        <div class="sv-head"><span><b>TESSERACT BRAIN</b> · SYSTEM ROLE</span><span>OBJECT 01</span></div>
+        <div class="sv-grid">
+          <div class="sv-col">
+            <div class="module"><small>SERVES</small><strong>The building's app</strong></div>
+            <div class="module hot"><small>KEEPS</small><strong>The building's records</strong></div>
+          </div>
+          <div class="sv-core" aria-hidden="true">
+            <svg class="rings" viewBox="0 0 300 300">
+              <circle class="ring-dash" cx="150" cy="150" r="128"></circle>
+              <circle class="ring-dash two" cx="150" cy="150" r="96"></circle>
+            </svg>
+            <div class="sv-mark">
+              <svg viewBox="0 0 320 320">
+                <g fill="none" stroke="#63b7ff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="160 28 284 100 284 220 160 292 36 220 36 100"/>
+                  <line x1="160" y1="28" x2="160" y2="292"/>
+                  <line x1="36" y1="100" x2="160" y2="160"/>
+                  <line x1="284" y1="100" x2="160" y2="160"/>
+                  <line x1="36" y1="220" x2="160" y2="160"/>
+                  <line x1="284" y1="220" x2="160" y2="160"/>
+                </g>
+                <g fill="none" stroke="#72d976" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="160 82 220 116 220 206 160 240 100 206 100 116"/>
+                  <line x1="160" y1="82" x2="160" y2="240"/>
+                  <line x1="100" y1="116" x2="160" y2="160"/>
+                  <line x1="220" y1="116" x2="160" y2="160"/>
+                  <line x1="100" y1="206" x2="160" y2="160"/>
+                  <line x1="220" y1="206" x2="160" y2="160"/>
+                </g>
+              </svg>
+            </div>
+            <span class="sv-core-label">LOCAL MODEL · GROUNDED CONTEXT</span>
+          </div>
+          <div class="sv-col">
+            <div class="module hot"><small>THINKS</small><strong>Local inference</strong></div>
+            <div class="module"><small>GREETS</small><strong>AI reception</strong></div>
+          </div>
+        </div>
+        <div class="sv-rail" aria-hidden="true"><span class="packet"></span><span class="packet two"></span><span class="packet three"></span></div>
+        <div class="sv-rail-label">THE ONLY EGRESS · <b>PAYMENT TOKEN · VISITOR PASS · ENCRYPTED BACKUP</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section stack-section" id="role">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <div class="eyebrow">One Device, the Whole Building</div>
+          <h2 class="section-title">Buildings rent their brains. This one owns it.</h2>
+        </div>
+        <p class="section-desc">Most building software lives in someone else's cloud. Brain inverts that: the entire Tesseract Home stack runs on hardware that belongs to the building, inside the building.</p>
+      </div>
+      <div class="stack-grid reveal">
+        <div class="stack-card"><b>01 / SERVES</b><strong>The app</strong><p>Tesseract Home itself is hosted on the device. Residents, staff, and management use the building's own server, not a distant one.</p></div>
+        <div class="stack-card"><b>02 / KEEPS</b><strong>The records</strong><p>The digital twin and every record it grounds against live on site. The building's memory is physically the building's property.</p></div>
+        <div class="stack-card"><b>03 / THINKS</b><strong>The model</strong><p>A language model runs locally on the device, answering over context that identity and retrieval have already scoped. Cloud inference stays explicit, optional, and logged.</p></div>
+        <div class="stack-card"><b>04 / GREETS</b><strong>The reception</strong><p>Brain's front-of-house face welcomes visitors at the lobby and answers over the building's shared knowledge, with every exchange captured for review.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="reception">
+    <div class="container">
+      <div class="reception-grid">
+        <div class="reception-copy reveal">
+          <div class="eyebrow">Front of House</div>
+          <h2 class="section-title">A reception that never steps away.</h2>
+          <p>The lobby is where a building meets its people, so it is where Brain shows its face. The AI reception greets visitors, answers questions over the building's <b>shared, common knowledge</b>, and hands off anything personal to the identity-gated app.</p>
+          <p>What Reception says is never a black box: exchanges are captured, auditable, and visible to the building's operators.</p>
+        </div>
+        <div class="reception-steps reveal">
+          <div class="reception-step"><b>GREET</b><div><strong>A visitor arrives</strong><span>Reception welcomes them and handles the visitor flow, passes included.</span></div></div>
+          <div class="reception-step"><b>GROUND</b><div><strong>The question is scoped</strong><span>Answers draw only on records the asker is allowed to see. Deny by default.</span></div></div>
+          <div class="reception-step"><b>ANSWER</b><div><strong>Spoken, and on the record</strong><span>The reply is grounded in the twin, and the exchange is captured for audit.</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section boundary-section" id="boundary">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <div class="eyebrow">The Boundary Is Physical</div>
+          <h2 class="section-title">Privacy you can point at.</h2>
+        </div>
+        <p class="section-desc">In Tesseract Home, privacy is not a policy paragraph. It is a wall. Brain is the reason the wall can be physical: when intelligence lives inside, data has no reason to leave.</p>
+      </div>
+      <div class="boundary-strip reveal">
+        <div class="boundary-card keeps"><b>STAYS</b><strong>Everything else</strong><span>The twin, the records, the questions, the answers. Resident data does not commute.</span></div>
+        <div class="boundary-card"><b>LEAVES / 01</b><strong>A payment token</strong><span>The payment action, not the context around it.</span></div>
+        <div class="boundary-card"><b>LEAVES / 02</b><strong>A visitor pass</strong><span>The credential the visitor flow requires.</span></div>
+        <div class="boundary-card"><b>LEAVES / 03</b><strong>An encrypted backup</strong><span>The protected recovery path, and nothing readable.</span></div>
+      </div>
+      <div class="honesty reveal">
+        <b>A note on honesty:</b> Brain is in development. We publish its architecture, not invented specifications, and there are no performance claims or dates on this page. When the hardware ships, the numbers will be the hardware's own.
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="return-band reveal">
+        <div>
+          <small>The Complete System</small>
+          <h2>Brain makes sense inside Tesseract Home.</h2>
+        </div>
+        <div class="hero-actions" style="margin-top: 0;">
+          <a href="home.html#architecture" class="btn green">Open the live architecture</a>
+          <a href="mailto:harshitchhajed@gmail.com?subject=Tesseract%20Brain" class="btn secondary">Register interest</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <span>TESSERACT · Real Estate Intelligence</span>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="twin.html">Twin</a>
+      <a href="home.html" class="active">Home</a>
+      <a href="brain.html">Brain · inside Home</a>
+      <a href="https://hacisonline.github.io/REbuildlog/" target="_blank" rel="noopener">Build Log</a>
+    </nav>
+    <span>Mumbai, India</span>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const menuButton = document.getElementById('menuButton');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuButton.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    menuButton.setAttribute('aria-expanded', String(isOpen));
+  });
+  mobileMenu.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      menuButton.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach((element, index) => {
+    element.style.transitionDelay = `${Math.min(index % 4, 3) * 70}ms`;
+    revealObserver.observe(element);
+  });
+});
+</script>
+</body>
+</html>
