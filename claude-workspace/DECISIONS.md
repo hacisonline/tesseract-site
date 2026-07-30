@@ -2,9 +2,10 @@
 
 Most recent first. One entry per material decision.
 
-## 2026-07-29 — thinktesseract.com goes canonical (supersedes the redirect decision)
+## 2026-07-30 — thinktesseract.com is live as the canonical host (supersedes the redirect decision)
 
-- **The site is hosted AT thinktesseract.com** via GitHub Pages custom domain: `CNAME` file in the repo root, apex A records at the registrar, domain forwarding removed. Canonical and OG URLs on all four pages point at https://thinktesseract.com. Enforce HTTPS once the certificate is issued. The Build Log stays at hacisonline.github.io/REbuildlog.
+- **The site is hosted AT thinktesseract.com** via GitHub Pages custom domain, live since 2026-07-30: `CNAME` file in the repo root (commit `cc3a4f5`), the four apex A records plus `www` CNAME → hacisonline.github.io at GoDaddy, registrar forwarding deleted. Canonical and OG URLs on all four pages point at https://thinktesseract.com; the old github.io URL 301-redirects. Enforce HTTPS on in repo Settings → Pages. The Build Log stays at hacisonline.github.io/REbuildlog.
+- **Order of operations is a hard rule** (learned from the 2026-07-29 outage): registrar forwarding OFF and A records IN before any CNAME file exists. Forwarding plus CNAME simultaneously is a redirect loop that takes the site down.
 
 ## 2026-07-29 — v3.2 owner critiques (thesis, touch, deploys)
 

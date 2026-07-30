@@ -2,6 +2,12 @@
 
 Most recent first.
 
+## 2026-07-30 (Cowork, Claude) — thinktesseract.com LIVE (custom domain, done right)
+
+- Second attempt, correct order: owner deleted the GoDaddy forwarding remnants (the "Parked" A record), added the four GitHub Pages apex A records on `@`, and pointed the `www` CNAME at hacisonline.github.io, all guided live in the GoDaddy DNS dashboard. DNS verified propagated (all four IPs resolving) before touching GitHub.
+- Owner then pushed the `CNAME` file from his terminal (commit `cc3a4f5`), which set the Pages custom domain. Certificate issued and https://thinktesseract.com confirmed serving the full v3.6 site from outside. Owner's local 405/awselb curl result diagnosed as his Mac's stale DNS cache (flush: `sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder`). Remaining owner tick-box: Enforce HTTPS in Settings → Pages.
+- Canonical + og:url + og:image flipped from hacisonline.github.io/tesseract-site to https://thinktesseract.com on all four pages (12 URLs). CLAUDE.md, STATUS, DECISIONS updated to the domain-live state; the old github.io URL now 301-redirects to the domain.
+
 ## 2026-07-29 (Cowork, Claude) — domain move ROLLED BACK (redirect loop)
 
 - The custom-domain push went out while the registrar's forwarding rule was still active: forwarding sent thinktesseract.com to github.io, the CNAME made github.io redirect back, and the site went down with a redirect loop. Rolled back same day: CNAME removed (owner runs `git rm CNAME`), canonical + og URLs restored to hacisonline.github.io/tesseract-site on all four pages, STATUS updated with the correct future order of operations (registrar DNS first, CNAME second). thinktesseract.com continues 302-forwarding as before.

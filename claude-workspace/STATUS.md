@@ -1,10 +1,10 @@
 # STATUS — Tesseract marketing site
 
-**Last updated:** 2026-07-29
+**Last updated:** 2026-07-30
 
 ## Current state
 
-**Site v3.1 (2026-07-29, including same-day owner review corrections) is built and QA-verified in the working tree, awaiting owner push.** Corrections applied after review: Brain nested under Home everywhere (no top-nav peer link), hero panels equalized, and the homepage restructured into a chaptered narrative (thesis band with the split-coloured live map and numbered world cards, then chapters 01 Twin / 02 Home / 03 Foundation). The four root pages share one design system (the canonical index tokens: deep navy, blue and green, Inter + JetBrains Mono, pill buttons, rounded panels):
+**Site v3.6 is LIVE at https://thinktesseract.com** (GitHub Pages custom domain since 2026-07-30; the old hacisonline.github.io/tesseract-site URL 301-redirects to the domain). All owner review rounds through v3.6 are pushed: Brain nested under Home everywhere (no top-nav peer link), hero panels equalized, the homepage restructured into a chaptered narrative with the lifecycle-spine thesis, the YOUR PROJECT hero HUD, sequential chapter-card spotlight, de-slop pass (no pulsing dots, no Build Log links), and the footer credit line. The four root pages share one design system (the canonical index tokens: deep navy, blue and green, Inter + JetBrains Mono, pill buttons, rounded panels):
 
 - `index.html` — canonical cube-reveal scroll intro preserved exactly (green cube, blue draw-in, wordmark, "Real Estate Intelligence.", product panels). New sections after the ecosystem: Twin V7.0 with a fresh live-product screenshot, Home with four architecture principles and Brain nested inside, The Presidential by Webtech Realty proof strip, foundation, CTA. Brain added to nav ("soon" tag) and footer.
 - `twin.html` — rebuilt on the shared system, reflecting the verified V7.0 state: fresh screenshots (overview + analytics, rendered from the real V7.0 file with the sample scenario), 6-stage lifecycle, capabilities incl. Monte Carlo (1,000 scenarios), Decision Flow and the tax layer, workbench strip (compare / offline / PDF), data strip (9 / 405 / 500+ / 574), sources.
@@ -23,7 +23,7 @@ Playwright, Chromium, real fonts: all 4 pages at 1440px and 390px, zero console 
 - Explorer = Home page hero only (homepage links to it, does not embed it).
 - Brain named publicly, full ADR-001 story, zero specifications.
 - The Presidential credited as "The Presidential by Webtech Realty".
-- Domain: **ROLLED BACK 2026-07-29 same day** to the original arrangement: site canonical at hacisonline.github.io/tesseract-site, thinktesseract.com keeps its registrar 302 forwarding, NO CNAME file. Reason: the committed CNAME plus the still-active registrar forwarding created a redirect loop ("cannot follow more than 20 redirects") and took the site down. When the owner is ready to host on the domain properly: FIRST delete the registrar forwarding and add the four GitHub Pages A records, THEN commit the CNAME and set the custom domain. Never both forwarding and CNAME at once.
+- Domain: **LIVE at thinktesseract.com since 2026-07-30**, done in the correct order this time: registrar forwarding deleted and the four GitHub Pages apex A records added at GoDaddy (plus `www` CNAME → hacisonline.github.io) FIRST, then the `CNAME` file pushed to `main` (commit `cc3a4f5`). Certificate issued; canonical + og URLs on all four pages point at https://thinktesseract.com. Standing rule from the 2026-07-29 outage: never registrar forwarding and a CNAME file at the same time — that combination is a redirect loop. The `CNAME` file must stay in the repo root.
 
 ## To publish (owner)
 
@@ -33,7 +33,7 @@ Playwright, Chromium, real fonts: all 4 pages at 1440px and 390px, zero console 
 git add -A && git commit -m "update" && git push
 ```
 
-Live in ~60 seconds; hard-refresh. The `codex/website-redesign` branch was merged into `main` on 2026-07-29 and is retired. The explorer folder (`home-architecture-explorer/`) must stay tracked: the Home hero iframes it. Optional cleanup: `git rm assets/twin_screenshot.png`; `draft-v2/` can stay as untracked history or be archived.
+Live in ~60 seconds; hard-refresh. The `codex/website-redesign` branch was merged into `main` on 2026-07-29 and is retired. The explorer folder (`home-architecture-explorer/`) must stay tracked: the Home hero iframes it. The root `CNAME` file must stay tracked too: it binds the thinktesseract.com custom domain. Optional cleanup: `git rm assets/twin_screenshot.png`; `draft-v2/` can stay as untracked history or be archived.
 
 ## Isolation
 

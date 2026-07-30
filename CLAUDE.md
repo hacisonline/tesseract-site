@@ -1,6 +1,6 @@
 # CLAUDE.md — Tesseract Marketing Site
 
-You are working on the **public marketing site for Tesseract** (the company), live at https://hacisonline.github.io/tesseract-site/ (thinktesseract.com 302-forwards here via the registrar). A move to hosting AT thinktesseract.com was attempted and ROLLED BACK on 2026-07-29 (redirect loop); see STATUS.md for the correct order of operations before trying again. Do NOT add a CNAME file while the registrar forwarding rule exists.
+You are working on the **public marketing site for Tesseract** (the company), live at **https://thinktesseract.com** (GitHub Pages custom domain since 2026-07-30; hacisonline.github.io/tesseract-site now 301-redirects here). The repo root `CNAME` file (containing `thinktesseract.com`) is load-bearing: never delete it, and never re-enable registrar domain forwarding while it exists (that combination caused the 2026-07-29 redirect loop).
 
 This folder is the **authoritative latest** version of the site. The `biz/tesseract-site/` folder elsewhere on the user's machine is older — ignore it. This folder is the one that gets pushed to GitHub Pages.
 
