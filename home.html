@@ -7,13 +7,13 @@
 <title>Tesseract Home - Building Intelligence</title>
 <meta name="description" content="Tesseract Home is edge AI infrastructure for a building: one digital twin fed by residents, staff, management, and sensors, answered locally on the building's own hardware. Explore the live architecture.">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="canonical" href="https://hacisonline.github.io/tesseract-site/home.html">
+<link rel="canonical" href="https://thinktesseract.com/home.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Tesseract">
 <meta property="og:title" content="Tesseract Home - Building Intelligence">
 <meta property="og:description" content="One building. One twin. Its own mind. Explore the live architecture of Tesseract Home.">
-<meta property="og:url" content="https://hacisonline.github.io/tesseract-site/home.html">
-<meta property="og:image" content="https://hacisonline.github.io/tesseract-site/assets/logo_master.png">
+<meta property="og:url" content="https://thinktesseract.com/home.html">
+<meta property="og:image" content="https://thinktesseract.com/assets/logo_master.png">
 <meta name="twitter:card" content="summary">
 <link rel="icon" type="image/svg+xml" href="assets/tesseract-mark.svg">
 <link rel="alternate icon" type="image/png" href="assets/logo_transparent.png">
@@ -233,18 +233,6 @@ a { color: inherit; }
   font-weight: 600;
   letter-spacing: 0.12em;
   white-space: nowrap;
-}
-.arch-live i {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 12px rgba(76, 175, 80, 0.7);
-  animation: livePulse 2.4s ease-in-out infinite;
-}
-@keyframes livePulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.45; }
 }
 .arch-frame-shell {
   position: relative;
@@ -484,6 +472,15 @@ a { color: inherit; }
 .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
 .footer-links a { color: var(--muted-strong); text-decoration: none; font-size: 0.84rem; font-weight: 700; transition: color 0.2s ease; }
 .footer-links a:hover { color: var(--ink); }
+.footer-credit {
+  margin-top: 14px;
+  text-align: center;
+  color: rgba(141, 161, 185, 0.55);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
 
 /* touch illumination */
 .role-card.lit { border-color: rgba(114, 217, 118, 0.4); background: rgba(12, 26, 45, 0.8); }
@@ -514,7 +511,7 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
-  .arch-live i, .brain-mark svg { animation: none; }
+  .brain-mark svg { animation: none; }
 }
 </style>
 </head>
@@ -554,7 +551,7 @@ a { color: inherit; }
           <div class="eyebrow">Tesseract Home · Building Intelligence</div>
           <h1>The architecture is the product. Explore it live.</h1>
         </div>
-        <span class="arch-live"><i></i>LIVE · INTERACTIVE</span>
+        <span class="arch-live">LIVE · INTERACTIVE</span>
       </div>
       <div class="arch-frame-shell">
         <iframe class="arch-frame" id="archFrame" src="home-architecture-explorer/" title="Live Tesseract Home system architecture: surfaces and sensors feed one digital twin, the identity gate binds every request, and Tesseract Brain answers locally"></iframe>
@@ -675,10 +672,10 @@ a { color: inherit; }
       <a href="twin.html">Twin</a>
       <a href="home.html">Home</a>
       <a href="brain.html">Brain · inside Home</a>
-      <a href="https://hacisonline.github.io/REbuildlog/" target="_blank" rel="noopener">Build Log</a>
     </nav>
     <span>Mumbai, India</span>
   </div>
+  <div class="container footer-credit">Lead developer · hacisonline</div>
 </footer>
 
 <script>

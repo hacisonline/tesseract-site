@@ -7,13 +7,13 @@
 <title>Tesseract - Real Estate Intelligence</title>
 <meta name="description" content="Tesseract builds real estate intelligence before and after the building exists: Tesseract Twin for development strategy, Tesseract Home for the lived building, and Tesseract Brain, the upcoming on-site hardware inside Home.">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="canonical" href="https://hacisonline.github.io/tesseract-site/">
+<link rel="canonical" href="https://thinktesseract.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Tesseract">
 <meta property="og:title" content="Tesseract - Real Estate Intelligence">
 <meta property="og:description" content="One intelligence thesis, two product worlds: Tesseract Twin before commitment, Tesseract Home once the building lives, and Tesseract Brain, the upcoming hardware inside Home.">
-<meta property="og:url" content="https://hacisonline.github.io/tesseract-site/">
-<meta property="og:image" content="https://hacisonline.github.io/tesseract-site/assets/logo_master.png">
+<meta property="og:url" content="https://thinktesseract.com/">
+<meta property="og:image" content="https://thinktesseract.com/assets/logo_master.png">
 <meta name="twitter:card" content="summary">
 <link rel="icon" type="image/svg+xml" href="assets/tesseract-mark.svg">
 <link rel="alternate icon" type="image/png" href="assets/logo_transparent.png">
@@ -1249,6 +1249,15 @@ a { color: inherit; }
   transition: color 0.2s ease;
 }
 .footer-links a:hover { color: var(--ink); }
+.footer-credit {
+  margin-top: 14px;
+  text-align: center;
+  color: rgba(141, 161, 185, 0.55);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
 /* touch illumination (scroll-lit cards where hover cannot reach) */
 .flow-card.lit {
   opacity: 1;
@@ -1318,7 +1327,7 @@ a { color: inherit; }
   .hero-product-panel.twin { left: 16px; bottom: 150px; transform: translate(var(--panel-left-x), var(--panel-y)); }
   .hero-product-panel.home { right: 16px; bottom: 16px; transform: translate(var(--panel-right-x), var(--panel-y)); }
   .flow-card { grid-template-columns: 1fr; transform: translateY(var(--diagram-lift)); }
-  .pin { position: static; width: auto; margin-top: 10px; }
+  .pin { position: static; width: auto; margin-top: 10px; transform: none; }
   .screenshot-panel { padding: 12px; }
   .footer-inner { flex-direction: column; }
   .panel-nest { display: none; }
@@ -1521,8 +1530,7 @@ a { color: inherit; }
           </div>
           <div class="flow-cta">
             <a href="twin.html" class="btn">Enter Tesseract Twin</a>
-            <a href="https://hacisonline.github.io/REbuildlog/" target="_blank" rel="noopener" class="btn secondary">View the build log</a>
-          </div>
+            </div>
         </div>
         <div class="screenshot-panel diagram-live">
           <img src="assets/twin_v7_model.webp" alt="Tesseract Twin V7.0 with a sample scenario: KPI tiles, composite risk score, and the six-stage project roadmap" loading="lazy">
@@ -1595,7 +1603,7 @@ a { color: inherit; }
         <div class="builder-proof reveal"><b>01</b><span>On-ground data from active Mumbai development projects used to calibrate model assumptions.</span></div>
         <div class="builder-proof reveal"><b>02</b><span>DCPR 2034, FSI, TDR, BMC premiums, RERA escrow, and delay risk treated as model logic.</span></div>
         <div class="builder-proof reveal"><b>03</b><span>Funding waterfall, debt, pre-sales, bridge financing, cash-flow IRR, ROE, and MOIC connected in one engine.</span></div>
-        <div class="builder-proof reveal"><b>04</b><span>Build log and live beta show the product evolving through real implementation, not demo theatre.</span></div>
+        <div class="builder-proof reveal"><b>04</b><span>A live beta evolving through real implementation and real projects, not demo theatre.</span></div>
       </div>
     </div>
   </section>
@@ -1622,10 +1630,10 @@ a { color: inherit; }
       <a href="twin.html">Twin</a>
       <a href="home.html">Home</a>
       <a href="brain.html">Brain · inside Home</a>
-      <a href="https://hacisonline.github.io/REbuildlog/" target="_blank" rel="noopener">Build Log</a>
     </nav>
     <span>Mumbai, India</span>
   </div>
+  <div class="container footer-credit">Lead developer · hacisonline</div>
 </footer>
 
 <script>

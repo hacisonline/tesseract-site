@@ -2,6 +2,17 @@
 
 Most recent first.
 
+## 2026-07-29 (Cowork, Claude) — v3.6: de-slop pass, build log delinked, footer credit
+
+- Owner cull of AI-cliché elements: the pulsing green dot chips are gone sitewide. twin.html's chip now reads just "BETA" (no dot, no "sample scenario shown"); home.html's "LIVE · INTERACTIVE" and brain.html's "In development" chips lost their pulsing dots (text kept, pulse keyframes removed).
+- Fixed mobile-only overlap: the annotation bars below product screenshots inherited the scroll-lift transform in their static mobile layout and started 14-18px shifted on first load; transform now cleared at ≤760px on index and twin. Verified no overlap at first paint.
+- All Build Log links removed sitewide (footer links on four pages, hero and CTA buttons on twin.html, chapter button on index) with copy scrubbed where it referenced the log. REbuildlog itself still exists; the site just no longer links to it.
+- Footer gained a single muted mono credit line on all four pages: "Lead developer · hacisonline".
+
+## 2026-07-29 (Cowork, Claude) — thinktesseract.com custom domain prepared
+
+- Owner decided to host at thinktesseract.com directly (supersedes the redirect decision). Added `CNAME` (thinktesseract.com), moved canonical + og:url + og:image on all four pages to https://thinktesseract.com, updated CLAUDE.md and STATUS. Owner actions: remove registrar domain forwarding, add the four GitHub Pages apex A records (+ optional www CNAME to hacisonline.github.io), set the custom domain in repo Settings → Pages, then Enforce HTTPS after the cert issues.
+
 ## 2026-07-29 (Cowork, Claude) — v3.5: YOUR PROJECT hero HUD, thesis scan-field, editorial alignment
 
 - Hero state one now names its subject: a viewfinder HUD (four breathing corner brackets + a mono "YOUR PROJECT" tag) frames the lone green cube, and dissolves exactly as the blue cube draws in, so the intro reads as the brand's actual claim: the green cube is the owner's asset, the blue cube is Tesseract wrapping intelligence around it. Wired to the existing --seq-asset scroll variable; verified opacity hits 0 by 30% of the hero.

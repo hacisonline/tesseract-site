@@ -7,13 +7,13 @@
 <title>Tesseract Twin - Development Strategy Platform</title>
 <meta name="description" content="Tesseract Twin V7.0 is a digital twin of the Mumbai development lifecycle: zone-aware costing, FSI and TDR strategy, funding waterfall, dynamic risk scoring, shortfall detection, and Monte Carlo analysis, in one offline-first file.">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="canonical" href="https://hacisonline.github.io/tesseract-site/twin.html">
+<link rel="canonical" href="https://thinktesseract.com/twin.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Tesseract">
 <meta property="og:title" content="Tesseract Twin - Development Strategy Platform">
 <meta property="og:description" content="See what others can't. A digital twin of the 6-stage Mumbai development lifecycle, now at V7.0.">
-<meta property="og:url" content="https://hacisonline.github.io/tesseract-site/twin.html">
-<meta property="og:image" content="https://hacisonline.github.io/tesseract-site/assets/logo_master.png">
+<meta property="og:url" content="https://thinktesseract.com/twin.html">
+<meta property="og:image" content="https://thinktesseract.com/assets/logo_master.png">
 <meta name="twitter:card" content="summary">
 <link rel="icon" type="image/svg+xml" href="assets/tesseract-mark.svg">
 <link rel="alternate icon" type="image/png" href="assets/logo_transparent.png">
@@ -260,13 +260,6 @@ a { color: inherit; }
   font-weight: 600;
   letter-spacing: 0.08em;
 }
-.version-chip i {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 12px rgba(76, 175, 80, 0.65);
-}
 .screenshot-panel {
   position: relative;
   padding: 16px;
@@ -496,6 +489,15 @@ a { color: inherit; }
 .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
 .footer-links a { color: var(--muted-strong); text-decoration: none; font-size: 0.84rem; font-weight: 700; transition: color 0.2s ease; }
 .footer-links a:hover { color: var(--ink); }
+.footer-credit {
+  margin-top: 14px;
+  text-align: center;
+  color: rgba(141, 161, 185, 0.55);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
 
 /* touch illumination */
 .stage-card.lit, .cap-card.lit, .data-card.lit { border-color: rgba(99, 183, 255, 0.4); background: rgba(12, 26, 45, 0.85); }
@@ -522,7 +524,7 @@ a { color: inherit; }
   .stage-card { min-height: 0; }
   .cap-grid, .workbench { grid-template-columns: 1fr; }
   .cap-card { min-height: 0; }
-  .pin { position: static; width: auto; margin-top: 10px; }
+  .pin { position: static; width: auto; margin-top: 10px; transform: none; }
   .screenshot-panel { padding: 12px; }
   .data-number { font-size: 1.75rem; }
   .footer-inner { flex-direction: column; }
@@ -583,9 +585,8 @@ a { color: inherit; }
         </p>
         <div class="hero-actions">
           <a href="mailto:harshitchhajed@gmail.com?subject=Tesseract%20Twin%20beta" class="btn">Request a walkthrough</a>
-          <a href="https://hacisonline.github.io/REbuildlog/" target="_blank" rel="noopener" class="btn secondary">View the build log</a>
         </div>
-        <div class="version-chip"><i></i>NOW AT V7.0 · BETA · SAMPLE SCENARIO SHOWN</div>
+        <div class="version-chip">BETA</div>
       </div>
       <div class="screenshot-panel diagram-live reveal">
         <img src="assets/twin_v7_overview.webp" alt="Tesseract Twin V7.0 overview: Mumbai zone selection with live zone data, FSI calculator with DCPR composition, and a shortfall alert" fetchpriority="high">
@@ -670,7 +671,7 @@ a { color: inherit; }
           <div class="eyebrow">Under the Hood</div>
           <h2 class="section-title">A model you can audit.</h2>
         </div>
-        <p class="section-desc">The Twin is an engineered financial instrument with a public build log. The numbers below are the model's own, not marketing rounding.</p>
+        <p class="section-desc">The Twin is an engineered financial instrument. The numbers below are the model's own, not marketing rounding.</p>
       </div>
       <div class="data-grid reveal">
         <div class="data-card"><div class="data-number">9</div><div class="data-label">Zones modelled</div></div>
@@ -693,10 +694,9 @@ a { color: inherit; }
       <div class="cta-panel reveal">
         <div class="eyebrow" style="justify-content: center;">See What Others Can't</div>
         <h2>Test the project before the project tests you.</h2>
-        <p>Request a walkthrough of the Twin with your own project assumptions, or explore the full build log.</p>
+        <p>Request a walkthrough of the Twin with your own project assumptions.</p>
         <div class="hero-actions" style="justify-content: center;">
           <a href="mailto:harshitchhajed@gmail.com?subject=Tesseract%20Twin%20beta" class="btn">Request a demo</a>
-          <a href="https://hacisonline.github.io/REbuildlog/" target="_blank" rel="noopener" class="btn secondary">View the build log</a>
         </div>
       </div>
     </div>
@@ -710,10 +710,10 @@ a { color: inherit; }
       <a href="twin.html">Twin</a>
       <a href="home.html">Home</a>
       <a href="brain.html">Brain · inside Home</a>
-      <a href="https://hacisonline.github.io/REbuildlog/" target="_blank" rel="noopener">Build Log</a>
     </nav>
     <span>Mumbai, India</span>
   </div>
+  <div class="container footer-credit">Lead developer · hacisonline</div>
 </footer>
 
 <script>

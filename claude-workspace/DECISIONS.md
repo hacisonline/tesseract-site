@@ -2,6 +2,10 @@
 
 Most recent first. One entry per material decision.
 
+## 2026-07-29 — thinktesseract.com goes canonical (supersedes the redirect decision)
+
+- **The site is hosted AT thinktesseract.com** via GitHub Pages custom domain: `CNAME` file in the repo root, apex A records at the registrar, domain forwarding removed. Canonical and OG URLs on all four pages point at https://thinktesseract.com. Enforce HTTPS once the certificate is issued. The Build Log stays at hacisonline.github.io/REbuildlog.
+
 ## 2026-07-29 — v3.2 owner critiques (thesis, touch, deploys)
 
 - **The thesis section must add information, not restate the hero.** It is now the lifecycle spine under "Every building lives twice.": Twin's half, the handover, Home's half with Brain nested inside. Side-by-side product-card duos are banned on the homepage; the hero already introduces the products.

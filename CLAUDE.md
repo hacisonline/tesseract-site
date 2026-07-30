@@ -1,6 +1,6 @@
 # CLAUDE.md — Tesseract Marketing Site
 
-You are working on the **public marketing site for Tesseract** (the company), live at https://hacisonline.github.io/tesseract-site/.
+You are working on the **public marketing site for Tesseract** (the company), live at **https://thinktesseract.com** (GitHub Pages custom domain on repo `hacisonline/tesseract-site`; the old hacisonline.github.io/tesseract-site URL 301-redirects here).
 
 This folder is the **authoritative latest** version of the site. The `biz/tesseract-site/` folder elsewhere on the user's machine is older — ignore it. This folder is the one that gets pushed to GitHub Pages.
 
@@ -54,7 +54,8 @@ This site is the **source of truth** for the Tesseract brand. The resident app (
    ```bash
    git add -A && git commit -m "Update X" && git push
    ```
-3. Live in ~60 seconds via GitHub Pages; hard-refresh to see it.
+3. Live in ~60 seconds at https://thinktesseract.com; hard-refresh to see it.
+4. The `CNAME` file in the repo root holds the custom domain. Never delete it; deleting it detaches thinktesseract.com.
 
 Push only finalised, locally reviewed changes: there is no staging step between `main` and the live site. The old `codex/website-redesign` working branch was merged into `main` on 2026-07-29 and is retired; do not resurrect it.
 
