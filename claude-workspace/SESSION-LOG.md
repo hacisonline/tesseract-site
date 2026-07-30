@@ -2,6 +2,12 @@
 
 Most recent first.
 
+## 2026-07-30 (Cowork, Claude) — v3.6.2: desktop Brain path, focus rings, CTA handoffs
+
+- Owner spotted that desktop had no navigation path to brain.html (the mobile menu had "↳ Brain · inside Home" but the desktop nav had nothing). The desktop nav now carries the same grammar: a smaller, muted "↳ Brain" sub-link tucked against Home (green ↳, tightened spacing so it reads as Home's annotation, never a peer). On brain.html both Home and the sub-link show active green. Hierarchy rule intact: Brain is still not a top-level nav item.
+- Keyboard focus rings added sitewide (a/button :focus-visible, blue outline, offset 3px): all four pages previously had zero focus-visible styling.
+- Twin's closing CTA no longer dead-ends: "Enter Tesseract Home" secondary added beside "Request a demo" (Home's CTA already crossed to Twin). Cross-product CTA verb unified on "Enter" (home.html's "Explore Tesseract Twin" renamed). Full sweep after: both viewports, all pages, zero errors, zero overflow, canonicals intact.
+
 ## 2026-07-30 (Cowork, Claude) — v3.6.1: single Home CTA, diamond eyebrow bullets
 
 - Owner: the Home chapter's "See the live architecture" button led to the same place as "Enter Tesseract Home" (the explorer IS the Home page hero). Removed on index; brain.html's closing-band "Open the live architecture" relabelled "Enter Tesseract Home". One CTA per product chapter, matching Twin.

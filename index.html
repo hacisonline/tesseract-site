@@ -143,6 +143,10 @@ a { color: inherit; }
   transition: color 0.2s ease;
 }
 .nav-links a:hover { color: var(--ink); }
+.nav-links a.nav-sub { margin-left: -16px; font-size: 0.8rem; color: var(--muted); }
+.nav-links a.nav-sub i { font-style: normal; color: var(--green-hot); margin-right: 5px; }
+.nav-links a.nav-sub:hover { color: var(--ink); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--blue-hot); outline-offset: 3px; border-radius: 6px; }
 .nav-cta, .btn {
   display: inline-flex;
   align-items: center;
@@ -1368,6 +1372,7 @@ a { color: inherit; }
     <div class="nav-links">
       <a href="twin.html">Twin</a>
       <a href="home.html">Home</a>
+      <a href="brain.html" class="nav-sub"><i>↳</i>Brain</a>
       <a href="#ecosystem">Thesis</a>
       <a href="#foundation">Foundation</a>
     </div>
