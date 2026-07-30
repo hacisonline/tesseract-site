@@ -23,7 +23,7 @@ Playwright, Chromium, real fonts: all 4 pages at 1440px and 390px, zero console 
 - Explorer = Home page hero only (homepage links to it, does not embed it).
 - Brain named publicly, full ADR-001 story, zero specifications.
 - The Presidential credited as "The Presidential by Webtech Realty".
-- Domain: **thinktesseract.com is the canonical home** (2026-07-29, supersedes the earlier redirect decision). CNAME file committed; canonical and OG URLs point at https://thinktesseract.com; the old GitHub Pages URL 301-redirects once the custom domain is active.
+- Domain: **ROLLED BACK 2026-07-29 same day** to the original arrangement: site canonical at hacisonline.github.io/tesseract-site, thinktesseract.com keeps its registrar 302 forwarding, NO CNAME file. Reason: the committed CNAME plus the still-active registrar forwarding created a redirect loop ("cannot follow more than 20 redirects") and took the site down. When the owner is ready to host on the domain properly: FIRST delete the registrar forwarding and add the four GitHub Pages A records, THEN commit the CNAME and set the custom domain. Never both forwarding and CNAME at once.
 
 ## To publish (owner)
 

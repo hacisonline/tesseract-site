@@ -2,6 +2,10 @@
 
 Most recent first.
 
+## 2026-07-29 (Cowork, Claude) — domain move ROLLED BACK (redirect loop)
+
+- The custom-domain push went out while the registrar's forwarding rule was still active: forwarding sent thinktesseract.com to github.io, the CNAME made github.io redirect back, and the site went down with a redirect loop. Rolled back same day: CNAME removed (owner runs `git rm CNAME`), canonical + og URLs restored to hacisonline.github.io/tesseract-site on all four pages, STATUS updated with the correct future order of operations (registrar DNS first, CNAME second). thinktesseract.com continues 302-forwarding as before.
+
 ## 2026-07-29 (Cowork, Claude) — v3.6: de-slop pass, build log delinked, footer credit
 
 - Owner cull of AI-cliché elements: the pulsing green dot chips are gone sitewide. twin.html's chip now reads just "BETA" (no dot, no "sample scenario shown"); home.html's "LIVE · INTERACTIVE" and brain.html's "In development" chips lost their pulsing dots (text kept, pulse keyframes removed).
