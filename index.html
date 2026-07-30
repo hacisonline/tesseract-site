@@ -693,7 +693,7 @@ a { color: inherit; }
   background: rgba(255, 255, 255, 0.035);
   opacity: var(--diagram-opacity);
   transform: translateX(var(--diagram-lift));
-  transition: opacity 0.35s ease, transform 0.35s ease, border-color 0.35s ease;
+  transition: opacity 0.35s ease, transform 0.35s ease, border-color 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
 }
 .flow.is-active .flow-card {
   border-color: rgba(99, 183, 255, 0.24);
@@ -1191,7 +1191,14 @@ a { color: inherit; }
 }
 .footer-links a:hover { color: var(--ink); }
 /* touch illumination (scroll-lit cards where hover cannot reach) */
-.flow-card.lit { border-color: rgba(99, 183, 255, 0.38); }
+.flow-card.lit {
+  opacity: 1;
+  border-color: rgba(99, 183, 255, 0.52);
+  background: rgba(12, 26, 45, 0.88);
+  box-shadow: 0 0 38px rgba(74, 158, 245, 0.14);
+  transform: translateX(0);
+}
+.flow-card.lit h3 { color: var(--ink); }
 .principle.lit { border-color: rgba(114, 217, 118, 0.45); background: rgba(12, 26, 45, 0.8); }
 .builder-proof.lit { border-color: rgba(99, 183, 255, 0.34); background: rgba(12, 26, 45, 0.7); }
 .brain-inline.lit { border-color: rgba(114, 217, 118, 0.55); }
@@ -1675,12 +1682,18 @@ document.addEventListener('DOMContentLoaded', () => {
   navState();
   window.addEventListener('scroll', navState, { passive: true });
 
+  // chapter narrative: spotlight each flow step as it crosses the viewport's middle band (all devices)
+  const flowObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => entry.target.classList.toggle('lit', entry.isIntersecting));
+  }, { rootMargin: '-41% 0px -41% 0px', threshold: 0 });
+  document.querySelectorAll('.flow-card').forEach((el) => flowObserver.observe(el));
+
   // polish: on touch screens, illuminate cards as they pass the viewport's middle band
   if (window.matchMedia('(hover: none)').matches) {
     const litObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => entry.target.classList.toggle('lit', entry.isIntersecting));
     }, { rootMargin: '-30% 0px -30% 0px', threshold: 0 });
-    document.querySelectorAll('.flow-card, .principle, .builder-proof, .brain-inline, .live-proof, .data-chips span').forEach((el) => litObserver.observe(el));
+    document.querySelectorAll('.principle, .builder-proof, .brain-inline, .live-proof, .data-chips span').forEach((el) => litObserver.observe(el));
   }
 });
 </script>

@@ -2,6 +2,10 @@
 
 Most recent first.
 
+## 2026-07-29 (Cowork, Claude) — v3.4: chapter 01 scroll spotlight restored
+
+- Owner noted the old public site lit each narrative card as you scrolled; the rebuild had only a whole-group fade on desktop. Chapter 01's flow cards (01 MODEL / 02 STRESS / 03 DECIDE) now spotlight sequentially on ALL devices: an IntersectionObserver with a one-card middle band (-41%) lights exactly the card being read (bright border, full opacity, glow) and hands off to the next. Flow cards removed from the touch-only observer so the two never fight. Verified: lit = [1,0,0] → [0,1,0] → [0,0,1] across the three scroll positions, zero errors, zero overflow.
+
 ## 2026-07-29 (Cowork, Claude) — v3.3: decision-execution spine, seamless Safari bars
 
 - Spine relabelled per owner: the centre node is the DECISION layer (not "handover"), followed by an EXECUTION segment (blue-to-green gradient line), then Tesseract Home. Story now reads Twin tests → decision → execution → Home runs. Intro copy adjusted.
