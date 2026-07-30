@@ -2,6 +2,12 @@
 
 Most recent first.
 
+## 2026-07-30 (Cowork, Claude) — v3.6.1: single Home CTA, diamond eyebrow bullets
+
+- Owner: the Home chapter's "See the live architecture" button led to the same place as "Enter Tesseract Home" (the explorer IS the Home page hero). Removed on index; brain.html's closing-band "Open the live architecture" relabelled "Enter Tesseract Home". One CTA per product chapter, matching Twin.
+- All eyebrow labels sitewide ("Tesseract Twin · Now at V7.0", "Tesseract Home · Living Intelligence", "The Thesis", etc.) swap the 30px gradient dash for the decision-node diamond as the brand bullet: 8px rounded square rotated 45deg, blue-to-green gradient, soft glow, pinned to the first line when the label wraps on mobile. One shared rule per file; verified both viewports, zero errors/overflow.
+- Ops note: the device-bridge staging cache served stale session-start snapshots today (old file content with fresh mtimes). The owner's real disk was verified healthy by direct probe; raw.githubusercontent also needed a cache-buster to show current main. Lesson: verify against the live probe, not the staging cache.
+
 ## 2026-07-30 (Cowork, Claude) — thinktesseract.com LIVE (custom domain, done right)
 
 - Second attempt, correct order: owner deleted the GoDaddy forwarding remnants (the "Parked" A record), added the four GitHub Pages apex A records on `@`, and pointed the `www` CNAME at hacisonline.github.io, all guided live in the GoDaddy DNS dashboard. DNS verified propagated (all four IPs resolving) before touching GitHub.
