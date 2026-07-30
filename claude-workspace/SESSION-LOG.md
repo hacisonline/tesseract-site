@@ -2,6 +2,13 @@
 
 Most recent first.
 
+## 2026-07-29 (Cowork, Claude) — v3.5: YOUR PROJECT hero HUD, thesis scan-field, editorial alignment
+
+- Hero state one now names its subject: a viewfinder HUD (four breathing corner brackets + a mono "YOUR PROJECT" tag) frames the lone green cube, and dissolves exactly as the blue cube draws in, so the intro reads as the brand's actual claim: the green cube is the owner's asset, the blue cube is Tesseract wrapping intelligence around it. Wired to the existing --seq-asset scroll variable; verified opacity hits 0 by 30% of the hero.
+- The thesis section gained a quiet instrumentation field: a fine 34px blueprint grid (radially masked) with a slow 12s scan sweep drifting across. Transform-only animation; disabled under reduced motion.
+- The thesis header block is now left-aligned (eyebrow tick restored, dek at 620px measure) matching the chapter heads, so every section header on the page follows one editorial system. Centered multi-line body copy eliminated.
+- index.html previously had NO reduced-motion handling (an original-site gap); a proper block now disables the HUD pulse, scan sweep, and spine pulses for prefers-reduced-motion.
+
 ## 2026-07-29 (Cowork, Claude) — v3.4: chapter 01 scroll spotlight restored
 
 - Owner noted the old public site lit each narrative card as you scrolled; the rebuild had only a whole-group fade on desktop. Chapter 01's flow cards (01 MODEL / 02 STRESS / 03 DECIDE) now spotlight sequentially on ALL devices: an IntersectionObserver with a one-card middle band (-41%) lights exactly the card being read (bright border, full opacity, glow) and hands off to the next. Flow cards removed from the touch-only observer so the two never fight. Verified: lit = [1,0,0] → [0,1,0] → [0,0,1] across the three scroll positions, zero errors, zero overflow.
