@@ -1361,6 +1361,176 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--blue-hot); outl
   .flow-card, .pin { transition-property: border-color, background, box-shadow; }
 }
 </style>
+
+<style id="layered-mark-hero">
+.hero { --seq-call-twin: 0; --seq-call-home: 0; --twin-roll: 0; --home-roll: 0; }
+
+/* layer dimming + roll-call brightness (overrides base cube rules) */
+.green-cube {
+  opacity: calc(var(--green-dim, 1) * (1 - var(--twin-roll) * 0.42));
+  filter: drop-shadow(0 0 18px rgba(76, 175, 80, 0.28)) brightness(calc(1 + var(--home-roll) * 0.4));
+  transition: opacity 0.2s ease, filter 0.2s ease;
+}
+.blue-cube {
+  opacity: calc(var(--seq-blue) * var(--blue-dim, 1) * (1 - var(--home-roll) * 0.42));
+  filter: drop-shadow(0 0 20px rgba(74, 158, 245, 0.35)) brightness(calc(1 + var(--twin-roll) * 0.4));
+}
+.logo-stage[data-state="twin"] { --green-dim: 0.3; }
+.logo-stage[data-state="home"] { --blue-dim: 0.32; }
+.logo-stage[data-state="twin"] .blue-cube { filter: drop-shadow(0 0 26px rgba(99, 183, 255, 0.5)) brightness(1.12); }
+.logo-stage[data-state="home"] .green-cube { filter: drop-shadow(0 0 26px rgba(114, 217, 118, 0.5)) brightness(1.12); }
+
+/* callout anatomy */
+.layer-a .node { stroke: none; }
+.twin-a .node { fill: var(--blue-hot); opacity: calc(var(--seq-call-twin) * 0.9); }
+.home-a .node { fill: var(--green-hot); opacity: calc(var(--seq-call-home) * 0.9); }
+.layer-a { cursor: pointer; outline: none; pointer-events: none; }
+.hero.calls-ready .layer-a { pointer-events: auto; }
+.layer-a .hit { fill: #000; fill-opacity: 0.001; stroke: none; pointer-events: fill; }
+.layer-a .leader, .layer-a .tick {
+  fill: none; stroke-width: 1; vector-effect: non-scaling-stroke;
+  stroke-dasharray: 100; stroke-linecap: butt;
+}
+.twin-a .leader, .twin-a .tick { stroke: rgba(99, 183, 255, 0.55); }
+.home-a .leader, .home-a .tick { stroke: rgba(114, 217, 118, 0.55); }
+.twin-a .leader { stroke-dashoffset: calc(100 - var(--seq-call-twin) * 100); }
+.home-a .leader { stroke-dashoffset: calc(100 - var(--seq-call-home) * 100); }
+.twin-a .tick { stroke-dasharray: none; opacity: clamp(0, (var(--seq-call-twin) - 0.72) * 3.57, 1); }
+.home-a .tick { stroke-dasharray: none; opacity: clamp(0, (var(--seq-call-home) - 0.72) * 3.57, 1); }
+
+.layer-a text {
+  font-family: "JetBrains Mono", monospace;
+  transition: opacity 0.22s ease;
+}
+.twin-a .call-texts { opacity: clamp(0, (var(--seq-call-twin) - 0.3) * 1.43, 1); transform: translateX(calc((1 - var(--seq-call-twin)) * 8px)); }
+.home-a .call-texts { opacity: clamp(0, (var(--seq-call-home) - 0.3) * 1.43, 1); transform: translateX(calc((1 - var(--seq-call-home)) * -8px)); }
+.layer-a .call-kicker { font-size: 10.5px; font-weight: 500; letter-spacing: 1.6px; fill: var(--muted); }
+.twin-a .call-kicker .idx { fill: var(--blue-hot); font-weight: 600; }
+.home-a .call-kicker .idx { fill: var(--green-hot); font-weight: 600; }
+.layer-a .call-name { font-size: 14.5px; font-weight: 600; letter-spacing: 2.1px; }
+.twin-a .call-name { fill: var(--blue-hot); }
+.home-a .call-name { fill: var(--green-hot); }
+.layer-a .call-role { font-size: 11px; font-weight: 400; letter-spacing: 0.3px; fill: var(--muted-strong); opacity: 0; }
+.layer-a .call-enter { font-size: 11.5px; font-weight: 600; letter-spacing: 1.4px; opacity: 0; }
+.twin-a .call-enter { fill: var(--blue-hot); }
+.home-a .call-enter { fill: var(--green-hot); }
+.home-a .call-brain { font-size: 10.5px; font-weight: 500; letter-spacing: 1.1px; fill: var(--muted); opacity: 0; }
+
+/* active tiers */
+.logo-stage[data-state="twin"] .twin-a .call-role,
+.logo-stage[data-state="twin"] .twin-a .call-enter,
+.logo-stage[data-state="home"] .home-a .call-role,
+.logo-stage[data-state="home"] .home-a .call-enter,
+.logo-stage[data-state="home"] .home-a .call-brain { opacity: 1; }
+.logo-stage[data-state="twin"] .home-a { opacity: 0.38; }
+.logo-stage[data-state="home"] .twin-a { opacity: 0.38; }
+.layer-a { transition: opacity 0.22s ease; }
+.layer-a:focus-visible .call-name { text-decoration: underline; text-underline-offset: 4px; }
+
+/* mobile rows: hidden on desktop */
+.layer-rows { display: none; }
+
+@media (max-width: 768px) {
+  .layer-a .call-texts, .layer-a .leader, .layer-a .tick { display: none; }
+  .layer-rows {
+    display: grid; gap: 10px;
+    position: absolute; left: 18px; right: 18px; bottom: 22px; z-index: 5;
+    opacity: var(--seq-call-twin);
+    transform: translateY(calc((1 - var(--seq-call-twin)) * 18px));
+  }
+  .layer-rows { gap: 0; }
+  .layer-row {
+    display: block; padding: 13px 4px 14px; text-decoration: none;
+    border-top: 1px solid rgba(99, 183, 255, 0.14);
+    transition: border-color 0.25s ease;
+  }
+  .layer-row:last-child { border-bottom: 1px solid rgba(99, 183, 255, 0.14); }
+  .layer-row .lr-k {
+    display: block;
+    font-family: "JetBrains Mono", monospace; font-size: 0.56rem; font-weight: 500;
+    letter-spacing: 0.16em; color: var(--muted); white-space: nowrap;
+  }
+  .layer-row.twin .lr-k i { font-style: normal; color: var(--blue-hot); font-weight: 600; }
+  .layer-row.home .lr-k i { font-style: normal; color: var(--green-hot); font-weight: 600; }
+  .layer-row .lr-main { display: flex; align-items: baseline; justify-content: space-between; margin-top: 5px; }
+  .layer-row b { font-size: 1rem; font-weight: 700; color: var(--ink); letter-spacing: -0.01em; transition: color 0.25s ease; }
+  .layer-row .lr-arrow { font-family: "JetBrains Mono", monospace; font-size: 0.9rem; opacity: 0.7; transition: opacity 0.25s ease, transform 0.25s ease; }
+  .layer-row.twin .lr-arrow { color: var(--blue-hot); }
+  .layer-row.home .lr-arrow { color: var(--green-hot); }
+  .logo-stage[data-state="twin"] .layer-row.twin { border-color: rgba(99, 183, 255, 0.55); }
+  .logo-stage[data-state="twin"] .layer-row.twin b { color: var(--blue-hot); }
+  .logo-stage[data-state="home"] .layer-row.home { border-color: rgba(114, 217, 118, 0.55); }
+  .logo-stage[data-state="home"] .layer-row.home b { color: var(--green-hot); }
+  .logo-stage[data-state="twin"] .layer-row.twin .lr-arrow,
+  .logo-stage[data-state="home"] .layer-row.home .lr-arrow { opacity: 1; transform: translateX(3px); }
+}
+</style>
+
+<style id="fullbleed-living-hero">
+/* ---- the box dies: one continuous field ---- */
+.logo-reveal {
+  border: 0;
+  border-radius: 0;
+  background:
+    radial-gradient(circle at 50% 44%, rgba(74, 158, 245, 0.12), transparent 21rem),
+    radial-gradient(circle at 52% 47%, rgba(76, 175, 80, 0.05), transparent 24rem);
+  box-shadow: none;
+  overflow: visible;
+}
+.logo-reveal::before, .logo-reveal::after { display: none; }
+.logo-reveal .logo-grid {
+  opacity: 0.22;
+  background-size: 44px 44px;
+  mask-image: radial-gradient(circle at 50% 46%, #000, transparent 78%);
+  -webkit-mask-image: radial-gradient(circle at 50% 46%, #000, transparent 78%);
+}
+
+/* ---- the mark is alive: light traveling the perimeters, luminance only ---- */
+.blue-cube .current, .green-cube .current {
+  fill: none;
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-dasharray: 9 91;
+  animation: edgeCurrent linear infinite;
+}
+.blue-cube .current {
+  stroke: #cfe7ff;
+  opacity: calc(0.22 * var(--seq-blue-late, 0) * var(--blue-dim, 1));
+  animation-duration: 10s;
+}
+.green-cube .current {
+  stroke: #dcf9dd;
+  opacity: calc(0.26 * var(--green-dim, 1));
+  animation-duration: 7.2s;
+  animation-delay: -3.1s;
+}
+.logo-stage[data-state="twin"] .blue-cube .current { opacity: calc(0.38 * var(--seq-blue-late, 0)); }
+.logo-stage[data-state="home"] .green-cube .current { opacity: 0.42; }
+@keyframes edgeCurrent { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
+
+/* ---- quiet load entrance for the viewfinder ---- */
+.asset-hud .c { animation: hudPart 0.8s ease-out 0.35s both; }
+.asset-hud .asset-hud-label { animation: hudPart 0.9s ease-out 0.7s both; }
+@keyframes hudPart { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.asset-hud .c.tl, .asset-hud .c.tr, .asset-hud .c.bl, .asset-hud .c.br { transform: none; }
+
+@media (max-width: 768px) {
+  .logo-reveal { border-radius: 0; border: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .blue-cube .current, .green-cube .current { animation: none; opacity: 0; }
+  .asset-hud .c, .asset-hud .asset-hud-label { animation: none; }
+}
+
+/* full-bleed polish: kill the aperture swirl ring, steady the field */
+.logo-stage::before { display: none; }
+.logo-reveal {
+  background:
+    radial-gradient(circle at 50% 44%, rgba(74, 158, 245, 0.10), transparent 26rem),
+    radial-gradient(circle at 52% 47%, rgba(76, 175, 80, 0.045), transparent 30rem);
+}
+.logo-reveal .logo-grid { opacity: 0.3; }
+</style>
 </head>
 <body>
 <nav class="nav">
@@ -1401,7 +1571,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--blue-hot); outl
             <i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>
             <span class="asset-hud-label">YOUR PROJECT</span>
           </div>
-          <div class="dimension-logo" aria-hidden="true">
+          <div class="dimension-logo">
             <svg viewBox="0 0 320 320">
               <g class="blue-cube">
                 <polygon class="draw" points="160 28 284 100 284 220 160 292 36 220 36 100"></polygon>
@@ -1410,6 +1580,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--blue-hot); outl
                 <line class="draw late" x1="284" y1="100" x2="160" y2="160"></line>
                 <line class="draw late" x1="36" y1="220" x2="160" y2="160"></line>
                 <line class="draw late" x1="284" y1="220" x2="160" y2="160"></line>
+                <polygon class="current" points="160 28 284 100 284 220 160 292 36 220 36 100" pathLength="100"></polygon>
               </g>
               <g class="green-cube">
                 <polygon points="160 82 220 116 220 206 160 240 100 206 100 116"></polygon>
@@ -1418,38 +1589,42 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--blue-hot); outl
                 <line x1="220" y1="116" x2="160" y2="160"></line>
                 <line x1="100" y1="206" x2="160" y2="160"></line>
                 <line x1="220" y1="206" x2="160" y2="160"></line>
+                <polygon class="current" points="160 82 220 116 220 206 160 240 100 206 100 116" pathLength="100"></polygon>
               </g>
+              <a href="twin.html" class="layer-a twin-a" aria-label="Tesseract Twin, the outer layer. Development strategy: tests the decision before capital commits.">
+                <path class="hit hit-donut" fill-rule="evenodd" d="M160 28 L284 100 L284 220 L160 292 L36 220 L36 100 Z M160 82 L220 116 L220 206 L160 240 L100 206 L100 116 Z"></path>
+                <circle class="node" cx="36" cy="160" r="3"></circle>
+                <path class="leader" pathLength="100" d="M36 160 L-8 188 L-152 188"></path>
+                <line class="tick" x1="-152" y1="182" x2="-152" y2="194"></line>
+                <g class="call-texts">
+                  <text class="call-kicker" x="-162" y="178" text-anchor="end"><tspan class="idx">01</tspan> · DEVELOPMENT STRATEGY</text>
+                  <text class="call-name" x="-162" y="207" text-anchor="end">TESSERACT TWIN</text>
+                  <text class="call-role" x="-162" y="229" text-anchor="end">Tests the decision before capital commits</text>
+                  <text class="call-enter" x="-162" y="252" text-anchor="end">ENTER TWIN →</text>
+                </g>
+              </a>
+              <a href="home.html" class="layer-a home-a" aria-label="Tesseract Home, the inner layer. Runs the building for the decades after. Tesseract Brain lives inside.">
+                <path class="hit hit-core" d="M160 82 L220 116 L220 206 L160 240 L100 206 L100 116 Z"></path>
+                <circle class="node" cx="220" cy="161" r="3"></circle>
+                <path class="leader" pathLength="100" d="M220 161 L264 189 L408 189"></path>
+                <line class="tick" x1="408" y1="183" x2="408" y2="195"></line>
+                <g class="call-texts">
+                  <text class="call-kicker" x="418" y="179" text-anchor="start"><tspan class="idx">02</tspan> · LIVING INTELLIGENCE</text>
+                  <text class="call-name" x="418" y="208" text-anchor="start">TESSERACT HOME</text>
+                  <text class="call-role" x="418" y="230" text-anchor="start">Runs the building for the decades after</text>
+                  <text class="call-enter" x="418" y="253" text-anchor="start">ENTER HOME →</text>
+                  <text class="call-brain" x="418" y="274" text-anchor="start">↳ TESSERACT BRAIN INSIDE</text>
+                </g>
+              </a>
             </svg>
           </div>
-          <div class="brand-wordmark">TESSERACT<span>See what others can't</span></div>
+          <div class="layer-rows">
+            <a class="layer-row twin" href="twin.html"><span class="lr-k"><i>01</i> · DEVELOPMENT STRATEGY</span><span class="lr-main"><b>Tesseract Twin</b><span class="lr-arrow">→</span></span></a>
+            <a class="layer-row home" href="home.html"><span class="lr-k"><i>02</i> · LIVING INTELLIGENCE</span><span class="lr-main"><b>Tesseract Home</b><span class="lr-arrow">→</span></span></a>
+          </div>
+          <div class="brand-wordmark">TESSERACT<span>See what others can’t</span></div>
           <div class="hero-intelligence">Real Estate <span>Intelligence.</span></div>
-          <a class="hero-product-panel twin" href="twin.html">
-            <span class="panel-kicker">Development Strategy</span>
-            <b>Explore Tesseract Twin</b>
-            <span class="panel-subtitle">The B2B Platform</span>
-            <span class="panel-copy">Model feasibility, approvals, funding, and execution risk before capital is committed.</span>
-            <span class="panel-points">
-              <span>FSI / TDR</span>
-              <span>Cashflow</span>
-              <span>Risk scoring</span>
-            </span>
-            <span class="panel-nest"><i></i>Now at V7.0 · 574 automated tests</span>
-            <em>Enter Twin <span class="arrow">→</span></em>
-          </a>
-          <a class="hero-product-panel home" href="home.html">
-            <span class="panel-kicker">Living Intelligence</span>
-            <b>Explore Tesseract Home</b>
-            <span class="panel-subtitle">The Home Platform</span>
-            <span class="panel-copy">One living model of the building: residents, staff, management, and local intelligence.</span>
-            <span class="panel-points">
-              <span>One twin</span>
-              <span>Privacy-first</span>
-              <span>Local AI</span>
-            </span>
-            <span class="panel-nest"><i></i>Inside: Tesseract Brain · upcoming hardware</span>
-            <em>Enter Home <span class="arrow">→</span></em>
-          </a>
-        </div>
+                            </div>
       </div>
     </div>
   </section>
@@ -1716,6 +1891,15 @@ document.addEventListener('DOMContentLoaded', () => {
     heroSequence.style.setProperty('--asset-y', `${(-asset * 2).toFixed(2)}px`);
     heroSequence.style.setProperty('--green-scale', (1 - blue * 0.04).toFixed(3));
     heroSequence.style.setProperty('--blue-scale', (0.74 + blue * 0.26).toFixed(3));
+    const callTwin = smoothstep(0.74, 0.85, progress);
+    const callHome = smoothstep(0.82, 0.93, progress);
+    const twinRoll = callTwin * (1 - smoothstep(0.84, 0.94, progress));
+    const homeRoll = callHome * (1 - smoothstep(0.93, 0.995, progress));
+    heroSequence.style.setProperty('--seq-call-twin', callTwin.toFixed(3));
+    heroSequence.style.setProperty('--seq-call-home', callHome.toFixed(3));
+    heroSequence.style.setProperty('--twin-roll', twinRoll.toFixed(3));
+    heroSequence.style.setProperty('--home-roll', homeRoll.toFixed(3));
+    heroSequence.classList.toggle('calls-ready', callTwin > 0.9);
     heroSequence.classList.toggle('products-visible', banners > 0.55);
   };
   const updateLiveDiagrams = () => {
@@ -1789,6 +1973,36 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.principle, .builder-proof, .brain-inline, .live-proof, .data-chips span').forEach((el) => litObserver.observe(el));
   }
 });
+</script>
+
+<script>
+(() => {
+  const stage = document.querySelector('.logo-stage');
+  if (!stage) return;
+  const layers = [
+    { key: 'twin', a: stage.querySelector('.twin-a') },
+    { key: 'home', a: stage.querySelector('.home-a') },
+  ];
+  const coarse = window.matchMedia('(hover: none)');
+  const set = (k) => { if (k) { stage.dataset.state = k; } else { delete stage.dataset.state; } };
+  layers.forEach(({ key, a }) => {
+    if (!a) return;
+    a.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') set(key); });
+    a.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') set(null); });
+    a.addEventListener('focus', () => set(key));
+    a.addEventListener('blur', () => set(null));
+    a.addEventListener('touchend', (e) => {
+      if (stage.dataset.state !== key) { e.preventDefault(); set(key); }
+    }, { passive: false });
+    a.addEventListener('click', (e) => {
+      const touchy = e.pointerType === 'touch' || coarse.matches;
+      if (touchy && stage.dataset.state !== key) { e.preventDefault(); set(key); }
+    });
+  });
+  document.addEventListener('pointerdown', (e) => {
+    if (!e.target.closest('.layer-a') && !e.target.closest('.layer-row')) set(null);
+  });
+})();
 </script>
 </body>
 </html>
