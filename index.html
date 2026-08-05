@@ -1408,6 +1408,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--blue-hot); outl
 .twin-a .call-kicker .idx { fill: var(--blue-hot); font-weight: 600; }
 .home-a .call-kicker .idx { fill: var(--green-hot); font-weight: 600; }
 .layer-a .call-name { font-size: 14.5px; font-weight: 600; letter-spacing: 2.1px; }
+.layer-a .call-name .brand-dim { opacity: 0.5; }
+.layer-a .call-sub { font-size: 10px; font-weight: 500; letter-spacing: 1.5px; fill: var(--muted); opacity: 0.85; }
 .twin-a .call-name { fill: var(--blue-hot); }
 .home-a .call-name { fill: var(--green-hot); }
 .layer-a .call-role { font-size: 11px; font-weight: 400; letter-spacing: 0.3px; fill: var(--muted-strong); opacity: 0; }
@@ -1422,6 +1424,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--blue-hot); outl
 .logo-stage[data-state="home"] .home-a .call-role,
 .logo-stage[data-state="home"] .home-a .call-enter,
 .logo-stage[data-state="home"] .home-a .call-brain { opacity: 1; }
+.home-a .brain-node { fill: var(--green-hot); opacity: 0; transition: opacity 0.25s ease; stroke: none; }
+.logo-stage[data-state="home"] .home-a .brain-node { opacity: 0.9; }
 .logo-stage[data-state="twin"] .home-a { opacity: 0.38; }
 .logo-stage[data-state="home"] .twin-a { opacity: 0.38; }
 .layer-a { transition: opacity 0.22s ease; }
@@ -1526,8 +1530,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--blue-hot); outl
 .logo-stage::before { display: none; }
 .logo-reveal {
   background:
-    radial-gradient(circle at 50% 44%, rgba(74, 158, 245, 0.10), transparent 26rem),
-    radial-gradient(circle at 52% 47%, rgba(76, 175, 80, 0.045), transparent 30rem);
+    radial-gradient(circle at 44% 44%, rgba(74, 158, 245, 0.10), transparent 26rem),
+    radial-gradient(circle at 58% 47%, rgba(76, 175, 80, 0.05), transparent 30rem);
 }
 .logo-reveal .logo-grid { opacity: 0.3; }
 </style>
@@ -1598,22 +1602,27 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--blue-hot); outl
                 <line class="tick" x1="-152" y1="182" x2="-152" y2="194"></line>
                 <g class="call-texts">
                   <text class="call-kicker" x="-162" y="178" text-anchor="end"><tspan class="idx">01</tspan> · DEVELOPMENT STRATEGY</text>
-                  <text class="call-name" x="-162" y="207" text-anchor="end">TESSERACT TWIN</text>
-                  <text class="call-role" x="-162" y="229" text-anchor="end">Tests the decision before capital commits</text>
-                  <text class="call-enter" x="-162" y="252" text-anchor="end">ENTER TWIN →</text>
+                  <text class="call-name" x="-162" y="207" text-anchor="end"><tspan class="brand-dim">TESSERACT </tspan>TWIN</text>
+                  <text class="call-sub" x="-162" y="227" text-anchor="end">V7.0 · 574 AUTOMATED TESTS</text>
+                  <text class="call-role r1" x="-162" y="252" text-anchor="end">Model feasibility, approvals, funding, and</text>
+                  <text class="call-role r2" x="-162" y="270" text-anchor="end">execution risk before capital is committed.</text>
+                  <text class="call-enter" x="-162" y="294" text-anchor="end">ENTER TWIN →</text>
                 </g>
               </a>
               <a href="home.html" class="layer-a home-a" aria-label="Tesseract Home, the inner layer. Runs the building for the decades after. Tesseract Brain lives inside.">
                 <path class="hit hit-core" d="M160 82 L220 116 L220 206 L160 240 L100 206 L100 116 Z"></path>
                 <circle class="node" cx="220" cy="161" r="3"></circle>
+                <circle class="brain-node" cx="160" cy="160" r="3.5"></circle>
                 <path class="leader" pathLength="100" d="M220 161 L264 189 L408 189"></path>
                 <line class="tick" x1="408" y1="183" x2="408" y2="195"></line>
                 <g class="call-texts">
                   <text class="call-kicker" x="418" y="179" text-anchor="start"><tspan class="idx">02</tspan> · LIVING INTELLIGENCE</text>
-                  <text class="call-name" x="418" y="208" text-anchor="start">TESSERACT HOME</text>
-                  <text class="call-role" x="418" y="230" text-anchor="start">Runs the building for the decades after</text>
-                  <text class="call-enter" x="418" y="253" text-anchor="start">ENTER HOME →</text>
-                  <text class="call-brain" x="418" y="274" text-anchor="start">↳ TESSERACT BRAIN INSIDE</text>
+                  <text class="call-name" x="418" y="208" text-anchor="start"><tspan class="brand-dim">TESSERACT </tspan>HOME</text>
+                  <text class="call-sub" x="418" y="228" text-anchor="start">PRIVATE BY DESIGN · ON-DEVICE</text>
+                  <text class="call-role r1" x="418" y="253" text-anchor="start">One living model of the building: residents,</text>
+                  <text class="call-role r2" x="418" y="271" text-anchor="start">staff, management, and local intelligence.</text>
+                  <text class="call-brain" x="418" y="295" text-anchor="start">↳ TESSERACT BRAIN INSIDE</text>
+                  <text class="call-enter" x="418" y="319" text-anchor="start">ENTER HOME →</text>
                 </g>
               </a>
             </svg>
