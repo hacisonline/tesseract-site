@@ -1435,38 +1435,127 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--blue-hot); outl
 .layer-rows { display: none; }
 
 @media (max-width: 768px) {
-  .layer-a .call-texts, .layer-a .leader, .layer-a .tick { display: none; }
-  .layer-rows {
-    display: grid; gap: 10px;
-    position: absolute; left: 18px; right: 18px; bottom: 22px; z-index: 5;
-    opacity: var(--seq-call-twin);
-    transform: translateY(calc((1 - var(--seq-call-twin)) * 18px));
+  /* the mark's own callouts are unreadable at this scale — the plate below replaces them */
+  .layer-a .call-texts, .layer-a .leader, .layer-a .tick, .layer-a .node, .layer-a .brain-node { display: none; }
+
+  /* portrait plate: mark keeps a shorter lift so the annotations own the space */
+  .dimension-logo {
+    width: min(190px, 54vw); height: min(190px, 54vw);
+    transform: translateY(calc(var(--stack-y) * 0.45))
+               scale(calc((var(--green-scale) + (var(--seq-blue) * 0.08)) * var(--stack-scale)));
   }
-  .layer-rows { gap: 0; }
+  .logo-stage {
+    --m-half: calc(min(190px, 54vw) / 2);
+    --m-lift: calc(var(--stack-y) * 0.45);
+    --m-edge: calc(min(190px, 54vw) / 2 + 8px);
+  }
+  /* headline anchors to the plate's foot, not to the centre */
+  .hero-intelligence {
+    top: auto; bottom: 26px;
+    transform: translate(-50%, calc((1 - var(--seq-intel)) * 12px));
+    font-size: clamp(1.05rem, 5.2vw, 1.5rem);
+  }
+
+  .layer-rows { display: block; position: absolute; inset: 0; z-index: 5; pointer-events: none; }
   .layer-row {
-    display: block; padding: 13px 4px 14px; text-decoration: none;
-    border-top: 1px solid rgba(99, 183, 255, 0.14);
+    position: absolute; left: 18px; right: 18px;
+    display: block; text-decoration: none; pointer-events: auto;
+  }
+  /* anchored to the mark itself, so the leaders always meet it on any screen height */
+  .layer-row.twin {
+    bottom: calc(50% + var(--m-half) - var(--m-lift) + 30px);
+    text-align: left;
+    opacity: var(--seq-call-twin);
+    transform: translateY(calc((1 - var(--seq-call-twin)) * 10px));
+  }
+  .layer-row.home {
+    top: calc(50% + var(--m-half) + var(--m-lift) + 30px);
+    text-align: right;
+    opacity: var(--seq-call-home);
+    transform: translateY(calc((1 - var(--seq-call-home)) * 10px));
+  }
+  /* orthogonal leaders: down-and-in from Twin, up-and-in from Home */
+  .layer-row::after {
+    content: ""; position: absolute; pointer-events: none;
+    height: calc(var(--m-half) + 22px);
     transition: border-color 0.25s ease;
   }
-  .layer-row:last-child { border-bottom: 1px solid rgba(99, 183, 255, 0.14); }
+  .layer-row.twin::after { width: calc(50% - var(--m-half) * 0.708); }
+  .layer-row.home::after { width: calc(50% - var(--m-half) * 0.342); }
+  .layer-row.twin::after {
+    left: 1px; top: 100%; margin-top: 8px;
+    border-left: 1px solid rgba(99, 183, 255, 0.34);
+    border-bottom: 1px solid rgba(99, 183, 255, 0.34);
+  }
+  .layer-row.home::after {
+    right: 1px; bottom: 100%; margin-bottom: 8px;
+    border-right: 1px solid rgba(114, 217, 118, 0.34);
+    border-top: 1px solid rgba(114, 217, 118, 0.34);
+  }
+  .layer-row::before {
+    content: ""; position: absolute; pointer-events: none;
+    width: 5px; height: 5px; border-radius: 50%;
+    transition: opacity 0.25s ease;
+  }
+  .layer-row.twin::before {
+    left: calc(50% - var(--m-half) * 0.708 - 2px);
+    top: calc(100% + var(--m-half) + 28px);
+    background: var(--blue-hot); opacity: 0.8;
+  }
+  .layer-row.home::before {
+    right: calc(50% - var(--m-half) * 0.342 - 2px);
+    bottom: calc(100% + var(--m-half) + 28px);
+    background: var(--green-hot); opacity: 0.8;
+  }
+
   .layer-row .lr-k {
-    display: block;
-    font-family: "JetBrains Mono", monospace; font-size: 0.56rem; font-weight: 500;
-    letter-spacing: 0.16em; color: var(--muted); white-space: nowrap;
+    display: block; font-family: "JetBrains Mono", monospace;
+    font-size: 0.56rem; font-weight: 500; letter-spacing: 0.16em;
+    color: var(--muted); white-space: nowrap;
   }
   .layer-row.twin .lr-k i { font-style: normal; color: var(--blue-hot); font-weight: 600; }
   .layer-row.home .lr-k i { font-style: normal; color: var(--green-hot); font-weight: 600; }
-  .layer-row .lr-main { display: flex; align-items: baseline; justify-content: space-between; margin-top: 5px; }
-  .layer-row b { font-size: 1rem; font-weight: 700; color: var(--ink); letter-spacing: -0.01em; transition: color 0.25s ease; }
-  .layer-row .lr-arrow { font-family: "JetBrains Mono", monospace; font-size: 0.9rem; opacity: 0.7; transition: opacity 0.25s ease, transform 0.25s ease; }
+  .layer-row .lr-n { display: flex; align-items: baseline; gap: 9px; margin-top: 3px; }
+  .layer-row.twin .lr-n { justify-content: flex-start; }
+  .layer-row.home .lr-n { justify-content: flex-start; flex-direction: row-reverse; }
+  .layer-row .lr-n b {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.92rem; font-weight: 600; letter-spacing: 0.13em;
+    text-transform: uppercase; color: var(--ink);
+    transition: color 0.25s ease;
+  }
+  .layer-row .lr-n b .bd { opacity: 0.5; }
+  .layer-row .lr-arrow {
+    font-family: "JetBrains Mono", monospace; font-size: 0.85rem; opacity: 0.55;
+    transition: opacity 0.25s ease, transform 0.25s ease; display: inline-block;
+  }
   .layer-row.twin .lr-arrow { color: var(--blue-hot); }
   .layer-row.home .lr-arrow { color: var(--green-hot); }
-  .logo-stage[data-state="twin"] .layer-row.twin { border-color: rgba(99, 183, 255, 0.55); }
-  .logo-stage[data-state="twin"] .layer-row.twin b { color: var(--blue-hot); }
-  .logo-stage[data-state="home"] .layer-row.home { border-color: rgba(114, 217, 118, 0.55); }
-  .logo-stage[data-state="home"] .layer-row.home b { color: var(--green-hot); }
+  /* fixed-height copy slot: spec at rest, description when the layer is selected — no reflow */
+  .layer-row .lr-copy { display: block; margin-top: 7px; min-height: 36px; }
+  .layer-row .lr-s {
+    display: block; font-family: "JetBrains Mono", monospace;
+    font-size: 0.5rem; font-weight: 500; letter-spacing: 0.13em; color: var(--muted);
+  }
+  .layer-row .lr-r {
+    display: none; font-family: "JetBrains Mono", monospace;
+    font-size: 0.66rem; line-height: 1.55; letter-spacing: 0.01em; color: var(--muted-strong);
+  }
+  .layer-row .lr-r em { font-style: normal; color: var(--green-hot); white-space: nowrap; }
+  .logo-stage[data-state="twin"] .layer-row.twin .lr-s,
+  .logo-stage[data-state="home"] .layer-row.home .lr-s { display: none; }
+  .logo-stage[data-state="twin"] .layer-row.twin .lr-r,
+  .logo-stage[data-state="home"] .layer-row.home .lr-r { display: block; }
+
+  /* selection reads as illumination, never as a box */
+  .logo-stage[data-state="twin"] .layer-row.twin .lr-n b { color: var(--blue-hot); }
+  .logo-stage[data-state="home"] .layer-row.home .lr-n b { color: var(--green-hot); }
+  .logo-stage[data-state="twin"] .layer-row.twin::after { border-color: rgba(99, 183, 255, 0.75); }
+  .logo-stage[data-state="home"] .layer-row.home::after { border-color: rgba(114, 217, 118, 0.75); }
   .logo-stage[data-state="twin"] .layer-row.twin .lr-arrow,
-  .logo-stage[data-state="home"] .layer-row.home .lr-arrow { opacity: 1; transform: translateX(3px); }
+  .logo-stage[data-state="home"] .layer-row.home .lr-arrow { opacity: 1; }
+  .logo-stage[data-state="twin"] .layer-row.home,
+  .logo-stage[data-state="home"] .layer-row.twin { opacity: 0.4; }
 }
 </style>
 
@@ -1627,9 +1716,23 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--blue-hot); outl
               </a>
             </svg>
           </div>
-          <div class="layer-rows">
-            <a class="layer-row twin" href="twin.html"><span class="lr-k"><i>01</i> · DEVELOPMENT STRATEGY</span><span class="lr-main"><b>Tesseract Twin</b><span class="lr-arrow">→</span></span></a>
-            <a class="layer-row home" href="home.html"><span class="lr-k"><i>02</i> · LIVING INTELLIGENCE</span><span class="lr-main"><b>Tesseract Home</b><span class="lr-arrow">→</span></span></a>
+          <div class="layer-rows" aria-hidden="false">
+            <a class="layer-row twin" href="twin.html">
+              <span class="lr-k"><i>01</i> · DEVELOPMENT STRATEGY</span>
+              <span class="lr-n"><b><span class="bd">Tesseract </span>Twin</b><span class="lr-arrow">→</span></span>
+              <span class="lr-copy">
+                <span class="lr-s">V7.0 · 574 AUTOMATED TESTS</span>
+                <span class="lr-r">Model feasibility, approvals, funding, and execution risk before capital is committed.</span>
+              </span>
+            </a>
+            <a class="layer-row home" href="home.html">
+              <span class="lr-k"><i>02</i> · LIVING INTELLIGENCE</span>
+              <span class="lr-n"><b><span class="bd">Tesseract </span>Home</b><span class="lr-arrow">→</span></span>
+              <span class="lr-copy">
+                <span class="lr-s">PRIVATE BY DESIGN · ON-DEVICE</span>
+                <span class="lr-r">One living model of the building: residents, staff, management, and local intelligence. <em>↳ Brain inside</em></span>
+              </span>
+            </a>
           </div>
           <div class="brand-wordmark">TESSERACT<span>See what others can’t</span></div>
           <div class="hero-intelligence">Real Estate <span>Intelligence.</span></div>
